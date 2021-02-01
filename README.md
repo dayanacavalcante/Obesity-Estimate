@@ -17,6 +17,33 @@ I load the data with the library Pandas. There are categories variables and nume
 
 One of the most time-consuming steps when working with Machine Learning models is data processing. It is also essential to make sense of any conclusions I can draw from the data. Through the _info()_ function I see that there are not no missing values and the data types.
 
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2111 entries, 0 to 2110
+Data columns (total 17 columns):
+ #   Column                          Non-Null Count  Dtype
+---  ------                          --------------  -----
+ 0   Gender                          2111 non-null   object
+ 1   Age                             2111 non-null   float64
+ 2   Height                          2111 non-null   float64
+ 3   Weight                          2111 non-null   float64
+ 4   family_history_with_overweight  2111 non-null   object
+ 5   FAVC                            2111 non-null   object
+ 6   FCVC                            2111 non-null   float64
+ 7   NCP                             2111 non-null   float64
+ 8   CAEC                            2111 non-null   object
+ 9   SMOKE                           2111 non-null   object
+ 10  CH2O                            2111 non-null   float64
+ 11  SCC                             2111 non-null   object
+ 12  FAF                             2111 non-null   float64
+ 13  TUE                             2111 non-null   float64
+ 14  CALC                            2111 non-null   object
+ 15  MTRANS                          2111 non-null   object
+ 16  NObeyesdad                      2111 non-null   object
+dtypes: float64(8), object(9)
+memory usage: 206.2+ KB
+```
+
 There are columns with object and floating data. First I treated the object type data with the _category_encoders_ method that uses a dictionary to determine the order of the attributes. You could use the Label Encoder method which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order.
 
 For the other floating type columns, I chose to round the values using the _round()_ function. I could also use the One Hot Encoding method or get_dummies from the Pandas library but as my number of columns would increase, I chose not to use it.
