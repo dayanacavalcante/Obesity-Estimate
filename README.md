@@ -7,11 +7,11 @@ The data belongs to a study made to estimate obesity levels in individuals from 
 The data were taken from the UCI Machine Learning Repository. Follow the link:  
 https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
 
-## **_Load Data_**
+## **Load Data**
 
 I load the data with the library Pandas. There are categories variables and numeric variables. Also there are variables with different orders of magnitude.
 
-## **_Exploratory Data Analysis (EDA)_**
+## **Exploratory Data Analysis (EDA)**
 
 ### _Data Processing_
 
