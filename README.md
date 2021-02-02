@@ -1,6 +1,6 @@
 # Obesity Estimate
 
-## **_Case Study_**
+## **Case Study**
 
 The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 attributes and 2111 features. The data analysis project is in progress.
 
@@ -44,7 +44,7 @@ dtypes: float64(8), object(9)
 memory usage: 206.2+ KB
 ```
 
-There are columns with object and floating data. First, treat the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The Label Encoder method could also be used, which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order.
+There are columns with object and floating data. First, treat the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order.
 
 ```
       Gender        Age    Height      Weight  family_history_with_overweight  FAVC  FCVC  NCP  CAEC  SMOKE      CH2O  SCC       FAF       TUE  CALC  MTRANS  NObeyesdad
@@ -62,7 +62,7 @@ There are columns with object and floating data. First, treat the object type da
 [2111 rows x 17 columns]
 ```
 
-For the other floating type columns, I chose to round the values using the _round()_ function. I could also use the One Hot Encoding method or get_dummies from the Pandas library but as my number of columns would increase, I chose not to use it.
+For the other floating type columns, I chose to round the values using the _round()_ function. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
 
 ```
       Gender  Age  Height  Weight  family_history_with_overweight  FAVC  FCVC  NCP  CAEC  SMOKE  CH2O  SCC  FAF  TUE  CALC  MTRANS  NObeyesdad
@@ -107,7 +107,7 @@ Time to briefly describe the content of the data!
 
 ### _Relationships Between Variables_
 
-Through the seaborn heatmap I can see the relationships between the variables. It shows us a strong relationship between the variables "Weight" and "NObeyesdad" and a considerable relationship between "Age" and "MTRANS".
+Through the seaborn heatmap the relationships between the variables can be analyzed. It shows us a strong relationship between the variables "Weight" and "NObeyesdad" and a considerable relationship between "Age" and "MTRANS".
 
 ![](/Graphics/heatmap.png)
 
