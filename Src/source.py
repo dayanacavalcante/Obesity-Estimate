@@ -53,6 +53,10 @@ for i,col in enumerate(list(data_encoder.columns.values)):
     plt.grid()
     plt.tight_layout()
 
+print(data_encoder.describe())
+print(data_encoder.mode())
+print(data_encoder.var())
+
 ## Relationships Between Variables
 
 plt.figure(figsize=(15,15))

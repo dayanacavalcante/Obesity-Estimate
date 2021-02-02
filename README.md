@@ -105,6 +105,68 @@ Time to briefly describe the content of the data!
 16.	**MTRANS**: most of the sample uses public transport;
 17. **NObeyesdad** (body mass index): most of the sample was with some level of obesity;
 
+The _describe()_ function returns descriptive statistics values, as follows:
+
+```
+            Gender          Age       Height       Weight  family_history_with_overweight         FAVC  ...          SCC          FAF          TUE         CALC       MTRANS   NObeyesdad
+count  2111.000000  2111.000000  2111.000000  2111.000000                     2111.000000  2111.000000  ...  2111.000000  2111.000000  2111.000000  2111.000000  2111.000000  2111.000000
+mean      0.494079    24.315964     1.701847    86.586452                        0.817622     0.883941  ...     0.045476     1.006632     0.664614     0.731407     2.405021     3.112269
+std       0.500083     6.357078     0.100385    26.190136                        0.386247     0.320371  ...     0.208395     0.895462     0.674009     0.515498     0.864439     1.985062
+min       0.000000    14.000000     1.400000    39.000000                        0.000000     0.000000  ...     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000
+25%       0.000000    20.000000     1.600000    65.500000                        1.000000     1.000000  ...     0.000000     0.000000     0.000000     0.000000     2.000000     1.000000
+50%       0.000000    23.000000     1.700000    83.000000                        1.000000     1.000000  ...     0.000000     1.000000     1.000000     1.000000     2.000000     3.000000
+75%       1.000000    26.000000     1.800000   107.000000                        1.000000     1.000000  ...     0.000000     2.000000     1.000000     1.000000     2.000000     5.000000
+max       1.000000    61.000000     2.000000   173.000000                        1.000000     1.000000  ...     1.000000     3.000000     2.000000     3.000000     4.000000     6.000000
+
+[8 rows x 17 columns]
+```
+
+#### _Central Trend Measures_
+
+1. Mean: indicates where the values are concentrated. Focusing on the "Age", "Height" and "Weight" columns, it can be noted that the sample average is 24 years old, 1.70 m and 86 kg.
+
+2. Median and Quantil: the median is the value that separates the top half from the bottom half of a data distribution, or the value at the center of the distribution. The median is a concept less susceptible to large outliers than the average. The 50% quantile is a median by default. Focusing on the "Age", "Height" and "Weight" columns, it can be seen that the median values are 23 years old, 1.70 m and 83 kg.
+
+3. Mode: is the most repeated value in the data. Through the _mode()_ function you can see that it is 21 yeras old, 1,70 m and 80 kg.
+```
+   Gender  Age  Height  Weight  family_history_with_overweight  FAVC  FCVC  NCP  CAEC  SMOKE  CH2O  SCC  FAF  TUE  CALC  MTRANS  NObeyesdad
+0       0   21     1.7      80                               1     1     2    3     1      0     2    0    1    0     1       2           4
+```
+
+#### _Dispersion Measures_
+
+1. Amplitude: difference between the highest and lowest value of the data set. There is a greater variation in the "Weight" column.
+- Age: 47;
+- Height: 0.6;
+- Weight: 134;
+
+2. Variance: expressed as the data of a set are far from its expected value. The variance of the "Weight" column is too high.
+```
+Gender                              0.250083
+Age                                40.412442
+Height                              0.010077
+Weight                            685.923210
+family_history_with_overweight      0.149187
+FAVC                                0.102638
+FCVC                                0.340945
+NCP                                 0.655582
+CAEC                                0.219533
+SMOKE                               0.020418
+CH2O                                0.474192
+SCC                                 0.043429
+FAF                                 0.801852
+TUE                                 0.454288
+CALC                                0.265738
+MTRANS                              0.747254
+NObeyesdad                          3.940470
+dtype: float64
+```
+
+3. Standard deviation: indicates how far the data is away from the mean. Again indicating greater attention to the "Age" and "Weight" columns.
+- Age: 6.3;
+- Height: 0.1;
+- Weight: 26.2;
+
 ### _Relationships Between Variables_
 
 Through the seaborn heatmap the relationships between the variables can be analyzed. It shows us a strong relationship between the variables "Weight" and "NObeyesdad" and a considerable relationship between "Age" and "MTRANS".
