@@ -2,20 +2,20 @@
 
 ## **_Case Study_**
 
-The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 attributes and 2111 features. My data analysis project is in progress.
+The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 attributes and 2111 features. The data analysis project is in progress.
 
 The data were taken from the UCI Machine Learning Repository. Follow the link:  
 https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
 
 ## **Load Data**
 
-I load the data with the library Pandas. There are categories variables and numeric variables. Also there are variables with different orders of magnitude.
+Load data with the Pandas library. There are categories variables and numeric variables. Also there are variables with different orders of magnitude.
 
 ## **Exploratory Data Analysis (EDA)**
 
 ### _Data Processing_
 
-One of the most time-consuming steps when working with Machine Learning models is data processing. It is also essential to make sense of any conclusions I can draw from the data. Through the _info()_ function I see that there are not no missing values and the data types.
+One of the most time-consuming steps when working with Machine Learning models is data processing. It is also essential to understand the conclusions that can be drawn from the data. Through the _info()_ function it is verified that there are not no missing values and the data types.
 
 ```
 <class 'pandas.core.frame.DataFrame'>
@@ -44,7 +44,7 @@ dtypes: float64(8), object(9)
 memory usage: 206.2+ KB
 ```
 
-There are columns with object and floating data. First I treated the object type data with the _category_encoders_ method that uses a dictionary to determine the order of the attributes. You could use the Label Encoder method which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order.
+There are columns with object and floating data. First, treat the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The Label Encoder method could also be used, which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order.
 
 ```
       Gender        Age    Height      Weight  family_history_with_overweight  FAVC  FCVC  NCP  CAEC  SMOKE      CH2O  SCC       FAF       TUE  CALC  MTRANS  NObeyesdad
