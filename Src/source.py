@@ -5,6 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import category_encoders as ce
+from sklearn.preprocessing import QuantileTransformer
+from sklearn.cluster import KMeans
+from sklearn import metrics
+from sklearn.cluster import DBSCAN
 
 # Load Data
 
@@ -72,3 +76,42 @@ for i, col in enumerate(list(data_encoder.columns.values)):
     plt.grid()
     plt.tight_layout()
 
+# Scaling of Data
+
+X_quantile = data_encoder.copy()
+X_quantile = QuantileTransformer().fit_transform(X_quantile)
+print(pd.DataFrame(X_quantile).describe())
+
+# Clustering
+# Centroids-based clustering: K-Means Clustering
+
+# Elbow Method
+
+SSE = []
+for cluster in range(1,20):
+    kmeans = KMeans(n_clusters = cluster, init = 'k-means++')
+    kmeans.fit(X_quantile)
+    SSE.append(kmeans.inertia_)
+
+frame = pd.DataFrame({'Cluster': range(1,20), 'SSE': SSE})
+plt.figure(figsize=(12,6))
+plt.plot(frame['Cluster'], frame['SSE'], marker='o')
+plt.xlabel('Number of Clusters')
+plt.ylabel('Inertia')
+
+# K = 8
+kmeans = KMeans(n_clusters = 8, init = 'k-means++')
+kmeans.fit(X_quantile)
+pred = kmeans.predict(X_quantile)
+
+final_data = pd.DataFrame(data_encoder)
+final_data['Cluster'] = pred
+print(final_data['Cluster'].value_counts())
+
+sns.relplot(data = final_data, x = 'Cluster', y = 'NObeyesdad', hue = pred, legend = "full", palette = "pastel", s = 200)
+
+sns.relplot(data = final_data, x = 'Cluster', y = 'FAF', hue = pred, legend = "full", palette = "pastel", s = 200)
+
+# Performance Metrics
+
+metrics.silhouette_score(X_quantile, kmeans.labels_,metric='euclidean')

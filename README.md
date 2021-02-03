@@ -44,7 +44,7 @@ dtypes: float64(8), object(9)
 memory usage: 206.2+ KB
 ```
 
-There are columns with object and floating data. First, treat the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order.
+There are columns with object and floating data. First, treat the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
 
 ```
       Gender        Age    Height      Weight  family_history_with_overweight  FAVC  FCVC  NCP  CAEC  SMOKE      CH2O  SCC       FAF       TUE  CALC  MTRANS  NObeyesdad
@@ -62,7 +62,7 @@ There are columns with object and floating data. First, treat the object type da
 [2111 rows x 17 columns]
 ```
 
-For the other floating type columns, I chose to round the values using the _round()_ function. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
+For the other floating type columns, I chose to round the values using the _round()_ function. But I kept the column "Height" with the floating type.
 
 ```
       Gender  Age  Height  Weight  family_history_with_overweight  FAVC  FCVC  NCP  CAEC  SMOKE  CH2O  SCC  FAF  TUE  CALC  MTRANS  NObeyesdad
@@ -180,6 +180,46 @@ One of the most important parts of Exploratory Data Analysis (EAD) is the detect
 I used box plot for data visualization. And it can be seen that there is a high number of outliers in the "Age" column.
 
 ![](/Graphics/boxplot.png)
+
+### _Scaling of Data_
+
+To enter the Machine Learning, data needs to be prepared. And what remains to start modeling the data is to do is to place the data in the same order of magnitude. For that, I use the _QuantileTransformer()_ method because it also deals with outliers. This method transforms the values in such a way that the distribution tends to approximate a normal distribution.
+
+```
+ 0            1            2            3            4            5            6   ...           10           11           12           13           14           15           16
+count  2111.000000  2111.000000  2111.000000  2111.000000  2111.000000  2111.000000  2111.000000  ...  2111.000000  2111.000000  2111.000000  2111.000000  2111.000000  2111.000000  2111.000000
+mean      0.494079     0.499981     0.500021     0.499999     0.817622     0.883941     0.610154  ...     0.503395     0.045476     0.443339     0.404981     0.454255     0.523298     0.503387
+std       0.500083     0.288009     0.277159     0.288820     0.386247     0.320371     0.373462  ...     0.344413     0.208395     0.348496     0.380610     0.305795     0.260697     0.316702
+min       0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000  ...     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000
+25%       0.000000     0.259259     0.192192     0.247247     1.000000     1.000000     0.288288  ...     0.492492     0.000000     0.000000     0.000000     0.000000     0.403904     0.196697
+50%       0.000000     0.535536     0.491491     0.501502     1.000000     1.000000     0.288288  ...     0.492492     0.000000     0.524525     0.667668     0.634635     0.403904     0.470470
+75%       1.000000     0.721221     0.798799     0.747748     1.000000     1.000000     1.000000  ...     0.492492     0.000000     0.826326     0.667668     0.634635     0.403904     0.776276
+max       1.000000     1.000000     1.000000     1.000000     1.000000     1.000000     1.000000  ...     1.000000     1.000000     1.000000     1.000000     1.000000     1.000000     1.000000
+
+[8 rows x 17 columns]
+```
+### _Model Training_
+
+#### _Clustering_
+
+1. Centroids-based clustering: K-Means Clustering.
+
+When applying the _Elbow Method_, the data does not form such a sharp elbow in the graph. But there is a significant change in angle from 5 clusters. I defined the number of clusters 8.
+
+![](/Graphics/NumberOfClusters_KMeans.png)
+
+Analyzing the columns "NObeyesdad"(body mass index) and "FAF"(frequency of physical activity) it is not possible to arrive at a cluster pattern using K-Means.
+
+| ![](/Graphics/relplot_NObeyesdad.png) | ![](/Graphics/relplot_FAF.png) |
+
+To check how good our cluster is, I use the Silhouette coefficient. The result was 0.17. As it is close to zero, I can say that the sample is very close to the neighboring clusters.
+
+
+
+
+
+
+
 
 
 
