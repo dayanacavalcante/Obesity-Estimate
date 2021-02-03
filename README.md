@@ -211,8 +211,10 @@ When applying the _Elbow Method_, the data does not form such a sharp elbow in t
 Analyzing the columns "NObeyesdad"(body mass index) and "FAF"(frequency of physical activity) it is not possible to arrive at a cluster pattern using K-Means.
 
 | ![](/Graphics/relplot_NObeyesdad.png) | ![](/Graphics/relplot_FAF.png) |
+|:-:|:-:|
 
 To check how good our cluster is, I use the Silhouette coefficient. The result was 0.17. As it is close to zero, I can say that the sample is very close to the neighboring clusters.
+
 
 
 
