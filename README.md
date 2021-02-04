@@ -227,6 +227,55 @@ Depending on the value you use for these parameters, the number of clusters can 
 
 In the first and third graphs, there is no trend in cluster behavior. In the first, it presented only one cluster and in the third it presented several clusters. In the second graph I can see a behavioral trend of the blue cluster, where it was better suited to the group that performs physical activities 4 to 5 days a week.
 
+#### _IQR_
+
+As can be seen in the Seaborn Heatmap graph, there is a strong correlation between the variables "Nobeyesdad" and "Weight". I applied the Linear Regression model to these variables. 
+
+But in the box plot graph you can see that there is an outlier in the "Weight" variable. The Linear Regression algorithm is very sensitive to outliers. So before applying the model, I treated the outlier of the "Weight" variable. I used the IQR (Inter-Quartile Range) technique to identify the upper and lower limits of the data and removing values above and below the limits. 
+
+No more outliers are now seen in the box plot chart:
+![](/Graphics/boxplot_weight.png) 
+
+#### _Linear Regression_
+
+The model created was: 
+```
+The model is: NObeyesdad = -2.8961 + 0.069409X
+```
+![](/Graphics/LinearRegression.png)
+
+The quality of the model was assessed using the "R²" and the "p-value":
+```
+OLS Regression Results
+==============================================================================
+Dep. Variable:             NObeyesdad   R-squared:                       0.835
+Model:                            OLS   Adj. R-squared:                  0.835
+Method:                 Least Squares   F-statistic:                 1.068e+04
+Date:                Thu, 04 Feb 2021   Prob (F-statistic):               0.00
+Time:                        16:45:57   Log-Likelihood:                -2538.0
+No. Observations:                2110   AIC:                             5080.
+Df Residuals:                    2108   BIC:                             5091.
+Df Model:                           1
+Covariance Type:            nonrobust
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -2.8961      0.061    -47.690      0.000      -3.015      -2.777
+Weight         0.0694      0.001    103.325      0.000       0.068       0.071
+==============================================================================
+Omnibus:                       49.734   Durbin-Watson:                   0.952
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               40.137
+Skew:                           0.260   Prob(JB):                     1.92e-09
+Kurtosis:                       2.568   Cond. No.                         313.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+```
+R² is 0.835, this means that approximately 80% of the behavior of the variable "NObeyesdad" is explained by the variable "Weight".
+
+With P> | t | very low, the null hypothesis is rejected because some data very close to zero was probably covered by rounding. And it is important to note the information given by "F-Statistics". This number shows that there is a very high variance in the data set.
+
 
 
 

@@ -9,6 +9,9 @@ from sklearn.preprocessing import QuantileTransformer
 from sklearn.cluster import KMeans
 from sklearn import metrics
 from sklearn.cluster import DBSCAN
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+import statsmodels.api as sm
 
 # Load Data
 
@@ -131,3 +134,61 @@ plt.scatter(X[:,0], X[:,1], c = pred_labels, cmap = 'Paired')
 plt.xlabel('FAF')
 plt.ylabel('NObeyesdad')
 plt.title('DBSCAN')
+
+# IQR
+
+Q1, Q3 = np.percentile(data_encoder.Weight, [25,75])
+print(Q1,Q3)
+
+IQR = Q3 - Q1
+print(IQR)
+
+# Lower Range
+low_range = Q1 - (1.5*IQR)
+print(low_range)
+
+# Upper Range
+upper_range = Q3 + (1.5*IQR)
+print(upper_range)
+
+data_iqr = data_encoder.copy()
+
+data_iqr.drop(data_iqr[(data_iqr.Weight > 169.25) | (data_iqr.Weight < 3.25)].index, inplace = True)
+
+ax = sns.boxplot(y = "Weight", data = data_iqr)
+
+# Creating the model
+# LinearRegression
+X = data_iqr['Weight'].values.reshape(-1,1)
+y = data_iqr['NObeyesdad'].values.reshape(-1,1)
+
+lr = LinearRegression()
+lr.fit(X,y)
+
+print("The model is: NObeyesdad = {:.5} + {:.5}X".format(lr.intercept_[0], lr.coef_[0][0]))
+
+pred = lr.predict(X)
+
+plt.figure(figsize = (16,8))
+plt.scatter(
+    data_iqr['Weight'],
+    data_iqr['NObeyesdad'],
+    c = 'blue')
+
+plt.plot(
+    data_iqr['Weight'],
+    pred,
+    c = 'red',
+    linewidth = 3,
+    linestyle = ':')
+
+plt.xlabel('Weight')
+plt.ylabel('NObeyesdad')
+plt.show()
+
+X = data_iqr['Weight']
+y = data_iqr['NObeyesdad']
+X2 = sm.add_constant(X)
+est = sm.OLS(y,X2)
+est2 = est.fit()
+print(est2.summary())
