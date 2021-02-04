@@ -2,7 +2,7 @@
 
 ## **Case Study**
 
-The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 attributes and 2111 features. The data analysis project is in progress.
+The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 features and 2111 rows. The data analysis project is in progress.
 
 The data were taken from the UCI Machine Learning Repository. Follow the link:  
 https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
@@ -183,7 +183,7 @@ I used box plot for data visualization. And it can be seen that there is a high 
 
 ### _Scaling of Data_
 
-To enter the Machine Learning, data needs to be prepared. And what remains to start modeling the data is to do is to place the data in the same order of magnitude. For that, I use the _QuantileTransformer()_ method because it also deals with outliers. This method transforms the values in such a way that the distribution tends to approximate a normal distribution.
+To enter the Machine Learning, data needs to be prepared. And what remains to start modeling the data is to do is to place the data in the same order of magnitude. For that, I used the _QuantileTransformer()_ method because it also deals with outliers. This method transforms the values in such a way that the distribution tends to approximate a normal distribution.
 
 ```
  0            1            2            3            4            5            6   ...           10           11           12           13           14           15           16
@@ -214,18 +214,18 @@ Analyzing the columns "NObeyesdad"(body mass index) and "FAF"(frequency of physi
 | ![](/Graphics/relplot_NObeyesdad.png) | ![](/Graphics/relplot_FAF.png) |
 |:-:|:-:|
 
-To check how good our cluster is, I use the Silhouette coefficient. The result was 0.17. As it is close to zero, I can say that the sample is very close to the neighboring clusters.
+To check how good our cluster is, I used the Silhouette coefficient. The result was 0.17. As it is close to zero, I can say that the sample is very close to the neighboring clusters.
 
 2. Density-based clustering: DBSCAN (Density-Based Spatial Clustering of Applications with Noise).
 
-DBSCAN frames the points according to the parameters: _eps_ and _min_samples_. In practice, it joins the points within a certain distance with a minimum number of samples to close the cluster. Then depending on the value you use for these parameters, the number of clusters can change.
+DBSCAN frames the points according to the parameters: _eps_ and _min_samples_. In practice, it joins the points within a certain distance with a minimum number of samples to close the cluster.
 
-Depending on the value you use for these parameters, the number of clusters can change, as shown in the graphs below. The first graph was used eps = 1 and min_samples = 20. The second graph was used eps = .95 and min_samples = 50. And the third graph was used eps = .95 and min_samples = 20.
+Depending on the value you use for these parameters, the number of clusters can change, as shown in the graphs below. The first graph was used _eps_ = 1 and _min_samples_ = 20. The second graph was used _eps_ = .95 and _min_samples_ = 50. And the third graph was used _eps_ = .95 and _min_samples_ = 20.
 
 | ![](/Graphics/DBSCAN_eps1_min_sample20.png) | ![](/Graphics/DBSCAN_eps.95_min_sample50.png) | ![](/Graphics/DBSCAN_eps.95_min_sample20.png) |
 |:-:|:-:|:-:|
 
-
+In the first and third graphs, there is no trend in cluster behavior. In the first, it presented only one cluster and in the third it presented several clusters. In the second graph I can see a behavioral trend of the blue cluster, where it was better suited to the group that performs physical activities 4 to 5 days a week.
 
 
 
