@@ -242,6 +242,8 @@ The model created was:
 ```
 The model is: NObeyesdad = -2.8961 + 0.069409X
 ```
+
+There is a positive correlation between the predictive variable "Weight" and the predicted variable "NObeyesdad":
 ![](/Graphics/LinearRegression.png)
 
 The quality of the model was assessed using the "R²" and the "p-value":
@@ -274,7 +276,9 @@ Notes:
 ```
 R² is 0.835, this means that approximately 80% of the behavior of the variable "NObeyesdad" is explained by the variable "Weight".
 
-With P> | t | very low, the null hypothesis is rejected because some data very close to zero was probably covered by rounding. And it is important to note the information given by "F-Statistics". This number shows that there is a very high variance in the data set.
+With P> | t | very low, probably because some data very close to zero was covered by rounding. So the null hypothesis is rejected. The null hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to perform, it must be false. 
+
+It is also important to note the information given by "F-Statistics". This number shows that there is a very high variance in the data set.
 
 
 
