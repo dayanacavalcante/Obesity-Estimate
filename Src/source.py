@@ -115,3 +115,19 @@ sns.relplot(data = final_data, x = 'Cluster', y = 'FAF', hue = pred, legend = "f
 # Performance Metrics
 
 metrics.silhouette_score(X_quantile, kmeans.labels_,metric='euclidean')
+
+# DBSCAN
+
+X = data_encoder.iloc[:,[12,16]].values
+print(X)
+
+clustering_model = DBSCAN(eps=.95, min_samples = 70)
+clustering_model.fit(X)
+pred_labels = clustering_model.labels_
+
+print(pred_labels)
+
+plt.scatter(X[:,0], X[:,1], c = pred_labels, cmap = 'Paired')
+plt.xlabel('FAF')
+plt.ylabel('NObeyesdad')
+plt.title('DBSCAN')

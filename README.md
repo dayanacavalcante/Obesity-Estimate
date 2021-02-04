@@ -202,18 +202,28 @@ max       1.000000     1.000000     1.000000     1.000000     1.000000     1.000
 
 #### _Clustering_
 
-1. Centroids-based clustering: K-Means Clustering.
+1. Centroids-based clustering: K-Means.
 
 When applying the _Elbow Method_, the data does not form such a sharp elbow in the graph. But there is a significant change in angle from 5 clusters. I defined the number of clusters 8.
 
 ![](/Graphics/NumberOfClusters_KMeans.png)
 
-Analyzing the columns "NObeyesdad"(body mass index) and "FAF"(frequency of physical activity) it is not possible to arrive at a cluster pattern using K-Means.
+The good thing about K-means is that it is a fast method because it does not perform many calculations. However, it is difficult to identify and classify groups. As it starts with a random choice of cluster centers, the results can be inconsistent.
+Analyzing the columns "NObeyesdad"(body mass index) and "FAF"(frequency of physical activity) cannot find a pattern.
 
 | ![](/Graphics/relplot_NObeyesdad.png) | ![](/Graphics/relplot_FAF.png) |
 |:-:|:-:|
 
 To check how good our cluster is, I use the Silhouette coefficient. The result was 0.17. As it is close to zero, I can say that the sample is very close to the neighboring clusters.
+
+2. Density-based clustering: DBSCAN (Density-Based Spatial Clustering of Applications with Noise).
+
+DBSCAN frames the points according to the parameters: _eps_ and _min_samples_. In practice, it joins the points within a certain distance with a minimum number of samples to close the cluster. Then depending on the value you use for these parameters, the number of clusters can change.
+
+Depending on the value you use for these parameters, the number of clusters can change, as shown in the graphs below. The first graph was used eps = 1 and min_samples = 20. The second graph was used eps = .95 and min_samples = 70. And the third graph was used eps = .95 and min_samples = 20.
+
+| ![](/Graphics/DBSCAN_eps1_min_sample20.png) | ![](/Graphics/DBSCAN_eps.95_min_sample70.png) | ![](/Graphics/DBSCAN_eps.95_min_sample20.png) |
+|:-:|:-:|:-:|
 
 
 
