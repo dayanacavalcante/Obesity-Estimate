@@ -121,7 +121,7 @@ metrics.silhouette_score(X_quantile, kmeans.labels_,metric='euclidean')
 X = data_encoder.iloc[:,[12,16]].values
 print(X)
 
-clustering_model = DBSCAN(eps=.95, min_samples = 70)
+clustering_model = DBSCAN(eps=.95, min_samples = 50)
 clustering_model.fit(X)
 pred_labels = clustering_model.labels_
 

@@ -220,9 +220,9 @@ To check how good our cluster is, I use the Silhouette coefficient. The result w
 
 DBSCAN frames the points according to the parameters: _eps_ and _min_samples_. In practice, it joins the points within a certain distance with a minimum number of samples to close the cluster. Then depending on the value you use for these parameters, the number of clusters can change.
 
-Depending on the value you use for these parameters, the number of clusters can change, as shown in the graphs below. The first graph was used eps = 1 and min_samples = 20. The second graph was used eps = .95 and min_samples = 70. And the third graph was used eps = .95 and min_samples = 20.
+Depending on the value you use for these parameters, the number of clusters can change, as shown in the graphs below. The first graph was used eps = 1 and min_samples = 20. The second graph was used eps = .95 and min_samples = 50. And the third graph was used eps = .95 and min_samples = 20.
 
-| ![](/Graphics/DBSCAN_eps1_min_sample20.png) | ![](/Graphics/DBSCAN_eps.95_min_sample70.png) | ![](/Graphics/DBSCAN_eps.95_min_sample20.png) |
+| ![](/Graphics/DBSCAN_eps1_min_sample20.png) | ![](/Graphics/DBSCAN_eps.95_min_sample50.png) | ![](/Graphics/DBSCAN_eps.95_min_sample20.png) |
 |:-:|:-:|:-:|
 
 
