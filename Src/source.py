@@ -23,6 +23,27 @@ print(data)
 
 print(data.info())
 
+"""
+Plot Weight vs FAF 
+Insufficient_Weight - 'red'; Normal_Weight - 'blue'; Overweight_Level_I - 'green'; 
+Overweight_Level_II - 'yellow'; Obesity_Type_I - 'purple'; Obesity_Type_II - 'grey'; Obesity_Type_III - 'orange' 
+"""
+
+labels = ['Insufficient_Weight', 'Normal_Weight', 'Overweight_Level_I', 'Overweight_Level_II', 'Obesity_Type_I', 'Obesity_Type_II', 'Obesity_Type_III']
+colors = ['red', 'blue', 'green', 'yellow', 'purple', 'grey', 'orange']
+
+filter = lambda type: data['NObeyesdad'] == type
+
+plt.figure(figsize=(20,16))    
+ 
+for n in range(len(labels)):
+    plt.scatter(data['Weight'][filter(labels[n])], data['FAF'][filter(labels[n])], color = colors[n], label = labels[n])
+
+plt.xlabel('Weight')
+plt.ylabel('FAF')
+plt.legend()
+
+# Applying Ordinal Encoder 
 encoder = ce.OrdinalEncoder(mapping = [{'col':'Gender','mapping':{'Male':0,'Female':1}},
                             {'col':'family_history_with_overweight','mapping':{'no':0,'yes':1}},
                             {'col':'FAVC','mapping':{'no':0,'yes':1}},
@@ -157,8 +178,7 @@ data_iqr.drop(data_iqr[(data_iqr.Weight > 169.25) | (data_iqr.Weight < 3.25)].in
 
 ax = sns.boxplot(y = "Weight", data = data_iqr)
 
-# Creating the model
-# LinearRegression
+# Creating the Linear Regression Model
 X = data_iqr['Weight'].values.reshape(-1,1)
 y = data_iqr['NObeyesdad'].values.reshape(-1,1)
 

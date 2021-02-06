@@ -9,13 +9,18 @@ https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+ea
 
 ## **Load Data**
 
-Load data with the Pandas library. There are categories variables and numeric variables. Also there are variables with different orders of magnitude.
+When loading data with the Pandas library, it is noted that there are categorical variables and numeric variables. In addition, there are variables with different orders of magnitude.
 
 ## **Exploratory Data Analysis (EDA)**
-
 ### _Data Processing_
 
-One of the most time-consuming steps when working with Machine Learning models is data processing. It is also essential to understand the conclusions that can be drawn from the data. Through the _info()_ function it is verified that there are not no missing values and the data types.
+One of the most time-consuming steps when working with Machine Learning models is data processing. It is also essential to understand the conclusions that can be drawn from the data. 
+
+Analyzing the _sccater plot_ I can see the variation in the frequency of physical activity per week by the groups classified as "Insufficient Weight", "Normal Weight", "Overweight Lvel I", "Overweight Level II" and "Obesity Type I" and the increase in weight as the classification increases. And the higher weight can be noted in the groups classified as "Obesity Type II" and "Obesity Type III", as well as not performing physical activity more than twice a week by these groups.
+
+![](/Graphics/scatter_weight_faf.png)
+
+Through the _info()_ function it is verified that there are not no missing values and the data types.
 
 ```
 <class 'pandas.core.frame.DataFrame'>
@@ -231,7 +236,7 @@ In the first and third graphs, there is no trend in cluster behavior. In the fir
 
 As can be seen in the Seaborn Heatmap graph, there is a strong correlation between the variables "Nobeyesdad" and "Weight". I applied the Linear Regression model to these variables. 
 
-But in the box plot graph you can see that there is an outlier in the "Weight" variable. The Linear Regression algorithm is very sensitive to outliers. So before applying the model, I treated the outlier of the "Weight" variable. I used the IQR (Inter-Quartile Range) technique to identify the upper and lower limits of the data and removing values above and below the limits. 
+But in the box plot graph I can see that there is an outlier in the "Weight" variable. The Linear Regression algorithm is very sensitive to outliers. So before applying the model, I treated the outlier of the "Weight" variable. I used the IQR (Inter-Quartile Range) technique to identify the upper and lower limits of the data and removing values above and below the limits. 
 
 No more outliers are now seen in the box plot chart:
 ![](/Graphics/boxplot_weight.png) 
@@ -276,7 +281,7 @@ Notes:
 ```
 R² is 0.835, this means that approximately 80% of the behavior of the variable "NObeyesdad" is explained by the variable "Weight".
 
-With P> | t | very low, probably because some data very close to zero was covered by rounding. So the null hypothesis is rejected. The null hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to perform, it must be false. 
+With P> | t | very low, probably because some data very close to zero was covered by rounding. So the null hypothesis is rejected. The null hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to perform, it must be false. In general, if the "p-value" is less than 0.05, there is a strong relationship between the variables. 
 
 It is also important to note the information given by "F-Statistics". This number shows that there is a very high variance in the data set.
 
