@@ -207,21 +207,10 @@ pred_test = lr.predict(x_test)
 
 # Training Performance Metrics
 
-mae_train = mean_absolute_error(y_train, pred_train)
-mape_train = mean_absolute_percentage_error(y_train, pred_train)
-print('MAE_train: {}'.format(mae_train))
-print('MAPE_train: {}'.format(mape_train))
-
 mae_test = mean_absolute_error(y_test, pred_test)
 mape_test = mean_absolute_percentage_error(y_test, pred_test)
 print('MAE_test: {}'.format(mae_test))
 print('MAPE_test: {}'.format(mape_test))
-
-data_result = {
-    'Dataframe': ['train', 'test'],
-    'MAE': [mae_train, mae_test],
-    'MAPE': [mape_train, mape_test]}
-print(pd.DataFrame(data_result))
 
 # Cross Validation
 
