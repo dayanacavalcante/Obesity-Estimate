@@ -5,13 +5,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import category_encoders as ce
-from sklearn.preprocessing import QuantileTransformer
-from sklearn.cluster import KMeans
-from sklearn import metrics
-from sklearn.cluster import DBSCAN
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
 import statsmodels.api as sm
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_percentage_error
+from sklearn.model_selection import cross_val_score
 
 # Load Data
 
@@ -44,15 +43,15 @@ plt.ylabel('FAF')
 plt.legend()
 
 # Applying Ordinal Encoder 
-encoder = ce.OrdinalEncoder(mapping = [{'col':'Gender','mapping':{'Male':0,'Female':1}},
-                            {'col':'family_history_with_overweight','mapping':{'no':0,'yes':1}},
-                            {'col':'FAVC','mapping':{'no':0,'yes':1}},
-                            {'col':'CAEC','mapping':{'no':0,'Sometimes':1,'Frequently':2,'Always':3}},
-                            {'col':'SMOKE','mapping':{'no':0,'yes':1}},
-                            {'col':'SCC','mapping':{'no':0,'yes':1}},
-                            {'col':'CALC','mapping':{'no':0,'Sometimes':1,'Frequently':2,'Always':3}},
-                            {'col':'MTRANS','mapping':{'Bike':0,'Walking':1,'Public_Transportation':2,'Motorbike':3,'Automobile':4}},
-                            {'col':'NObeyesdad','mapping':{'Insufficient_Weight':0,'Normal_Weight':1,'Overweight_Level_I':2,'Overweight_Level_II':3,'Obesity_Type_I':4,'Obesity_Type_II':5,'Obesity_Type_III':6}}])
+encoder = ce.OrdinalEncoder(mapping = [{'col':'Gender','mapping':{'Male':1,'Female':2}},
+                            {'col':'family_history_with_overweight','mapping':{'no':1,'yes':2}},
+                            {'col':'FAVC','mapping':{'no':1,'yes':2}},
+                            {'col':'CAEC','mapping':{'no':1,'Sometimes':2,'Frequently':3,'Always':4}},
+                            {'col':'SMOKE','mapping':{'no':1,'yes':2}},
+                            {'col':'SCC','mapping':{'no':1,'yes':2}},
+                            {'col':'CALC','mapping':{'no':1,'Sometimes':2,'Frequently':3,'Always':4}},
+                            {'col':'MTRANS','mapping':{'Bike':1,'Walking':2,'Public_Transportation':3,'Motorbike':4,'Automobile':5}},
+                            {'col':'NObeyesdad','mapping':{'Insufficient_Weight':1,'Normal_Weight':2,'Overweight_Level_I':3,'Overweight_Level_II':4,'Obesity_Type_I':5,'Obesity_Type_II':6,'Obesity_Type_III':7}}])
 
 
 encoder.fit(data)
@@ -73,7 +72,7 @@ print(data_encoder)
 
 ## Descriptive Analysis
 
-plt.figure(figsize=(20,16))
+plt.figure(figsize=(20,16)) 
 
 for i,col in enumerate(list(data_encoder.columns.values)):
     plt.subplot(5,4,i+1)
@@ -100,94 +99,66 @@ for i, col in enumerate(list(data_encoder.columns.values)):
     plt.grid()
     plt.tight_layout()
 
-# Scaling of Data
-
-X_quantile = data_encoder.copy()
-X_quantile = QuantileTransformer().fit_transform(X_quantile)
-print(pd.DataFrame(X_quantile).describe())
-
-# Clustering
-# Centroids-based clustering: K-Means Clustering
-
-# Elbow Method
-
-SSE = []
-for cluster in range(1,20):
-    kmeans = KMeans(n_clusters = cluster, init = 'k-means++')
-    kmeans.fit(X_quantile)
-    SSE.append(kmeans.inertia_)
-
-frame = pd.DataFrame({'Cluster': range(1,20), 'SSE': SSE})
-plt.figure(figsize=(12,6))
-plt.plot(frame['Cluster'], frame['SSE'], marker='o')
-plt.xlabel('Number of Clusters')
-plt.ylabel('Inertia')
-
-# K = 8
-kmeans = KMeans(n_clusters = 8, init = 'k-means++')
-kmeans.fit(X_quantile)
-pred = kmeans.predict(X_quantile)
-
-final_data = pd.DataFrame(data_encoder)
-final_data['Cluster'] = pred
-print(final_data['Cluster'].value_counts())
-
-sns.relplot(data = final_data, x = 'Cluster', y = 'NObeyesdad', hue = pred, legend = "full", palette = "pastel", s = 200)
-
-sns.relplot(data = final_data, x = 'Cluster', y = 'FAF', hue = pred, legend = "full", palette = "pastel", s = 200)
-
-# Performance Metrics
-
-metrics.silhouette_score(X_quantile, kmeans.labels_,metric='euclidean')
-
-# DBSCAN
-
-X = data_encoder.iloc[:,[12,16]].values
-print(X)
-
-clustering_model = DBSCAN(eps=.95, min_samples = 50)
-clustering_model.fit(X)
-pred_labels = clustering_model.labels_
-
-print(pred_labels)
-
-plt.scatter(X[:,0], X[:,1], c = pred_labels, cmap = 'Paired')
-plt.xlabel('FAF')
-plt.ylabel('NObeyesdad')
-plt.title('DBSCAN')
-
 # IQR
+# Weight
+Q1_w, Q3_w = np.percentile(data_encoder.Weight, [25,75])
+print(Q1_w,Q3_w)
 
-Q1, Q3 = np.percentile(data_encoder.Weight, [25,75])
-print(Q1,Q3)
-
-IQR = Q3 - Q1
-print(IQR)
+IQR_w = Q3_w - Q1_w
+print(IQR_w)
 
 # Lower Range
-low_range = Q1 - (1.5*IQR)
-print(low_range)
+low_range_w = Q1_w - (1.5*IQR_w)
+print(low_range_w)
+print('The Wheight low range is: {}'.format(low_range_w))
 
 # Upper Range
-upper_range = Q3 + (1.5*IQR)
-print(upper_range)
+upper_range_w = Q3_w + (1.5*IQR_w)
+print(upper_range_w)
+print('The Wheight upper range is: {}'.format(upper_range_w))
+
+# Age
+Q1_a, Q3_a = np.percentile(data_encoder.Age, [25,75])
+print(Q1_a,Q3_a)
+
+IQR_a = Q3_a - Q1_a
+print(IQR_a)
+
+# Lower Range
+low_range_a = Q1_a - (1.5*IQR_a)
+print('The Age low range is: {}'.format(low_range_a))
+
+# Upper Range
+upper_range_a = Q3_a + (1.5*IQR_a)
+print(upper_range_a)
+print('The Age upper range is: {}'.format(upper_range_a))
 
 data_iqr = data_encoder.copy()
 
 data_iqr.drop(data_iqr[(data_iqr.Weight > 169.25) | (data_iqr.Weight < 3.25)].index, inplace = True)
+data_iqr.drop(data_iqr[(data_iqr.Age > 35.0) | (data_iqr.Age < 11.0)].index, inplace = True)
 
-ax = sns.boxplot(y = "Weight", data = data_iqr)
+print(data_iqr)
 
-# Creating the Linear Regression Model
+plt.figure(figsize=(8,6))
+sns.boxplot(y = "Weight", data = data_iqr)
+plt.show()
+
+plt.figure(figsize=(8,6))
+sns.boxplot(y = "Age", data = data_iqr)
+plt.show()
+
+# Creating the Linear Regression Model with "Weight" and "NObeyesdad" columns.
+
 X = data_iqr['Weight'].values.reshape(-1,1)
 y = data_iqr['NObeyesdad'].values.reshape(-1,1)
 
-lr = LinearRegression()
-lr.fit(X,y)
+reg = LinearRegression()
+reg.fit(X,y)
 
-print("The model is: NObeyesdad = {:.5} + {:.5}X".format(lr.intercept_[0], lr.coef_[0][0]))
+print("The model is: NObeyesdad = {:.5} + {:.5}X".format(reg.intercept_[0], reg.coef_[0][0]))
 
-pred = lr.predict(X)
+pred = reg.predict(X)
 
 plt.figure(figsize = (16,8))
 plt.scatter(
@@ -206,9 +177,53 @@ plt.xlabel('Weight')
 plt.ylabel('NObeyesdad')
 plt.show()
 
-X = data_iqr['Weight']
-y = data_iqr['NObeyesdad']
-X2 = sm.add_constant(X)
-est = sm.OLS(y,X2)
+Xols = data_iqr['Weight']
+yols = data_iqr['NObeyesdad']
+X2 = sm.add_constant(Xols)
+est = sm.OLS(yols,X2)
 est2 = est.fit()
 print(est2.summary())
+
+# Training the model with the data set
+
+Xlr = data_iqr.drop(['NObeyesdad'], axis = 1)
+ylr = data_iqr['NObeyesdad']
+
+# Separating training and test data
+
+x_train, x_test, y_train, y_test = train_test_split(Xlr,ylr,test_size = .3, random_state=1)
+
+print(x_train)
+print(y_train)
+
+# Model Training
+
+lr = LinearRegression()
+lr.fit(x_train,y_train)
+
+pred_train = lr.predict(x_train)
+pred_test = lr.predict(x_test)
+
+# Training Performance Metrics
+
+mae_train = mean_absolute_error(y_train, pred_train)
+mape_train = mean_absolute_percentage_error(y_train, pred_train)
+print('MAE_train: {}'.format(mae_train))
+print('MAPE_train: {}'.format(mape_train))
+
+mae_test = mean_absolute_error(y_test, pred_test)
+mape_test = mean_absolute_percentage_error(y_test, pred_test)
+print('MAE_test: {}'.format(mae_test))
+print('MAPE_test: {}'.format(mape_test))
+
+data_result = {
+    'Dataframe': ['train', 'test'],
+    'MAE': [mae_train, mae_test],
+    'MAPE': [mape_train, mape_test]}
+print(pd.DataFrame(data_result))
+
+# Cross Validation
+
+result_cv = cross_val_score(lr, x_test, y_test, cv = 10)
+print('Cross Validation: {}'.format(result_cv))
+print("%0.2f accuracy with a standard deviation of %0.2f" % (result_cv.mean(), result_cv.std()))
