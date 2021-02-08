@@ -230,7 +230,7 @@ I used box plot for data visualization. And it can be seen that there is a high 
 Before starting Machine Learning, I treated the outliers of the "Weight" and "Age" columns using the technique based on the interquartile range (IQR) that to identify the upper and lower limits of the data and removing values above and below the limits. 
 
 Now no more outliers are now seen in the box plot chart:
-| ![](/Graphics/boxplot_weight.png) | ![](/Graphics/boxplot_age.png)|
+| ![](/Graphics/boxplot_age.png) | ![](/Graphics/boxplot_weight.png)|
 |:-:|:-:|
 
 #### _Linear Regression_
