@@ -68,35 +68,57 @@ memory usage: 206.2+ KB
 There are columns with object and floating data. First, treat the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
 
 ```
-       Gender        Age    Height      Weight  family_history_with_overweight  FAVC  ...  SCC       FAF       TUE  CALC  MTRANS  NObeyesdad0          2  21.000000  1.620000   64.000000                               2     1  ...    1  0.000000  1.000000     1       3           21          2  21.000000  1.520000   56.000000                               2     1  ...    2  3.000000  0.000000     2       3           22          1  23.000000  1.800000   77.000000                               2     1  ...    1  2.000000  1.000000     3       3           23          1  27.000000  1.800000   87.000000                               1     1  ...    1  2.000000  0.000000     3       2           34          1  22.000000  1.780000   89.800000                               1     1  ...    1  0.000000  0.000000     2       3           4...      ...        ...       ...         ...                             ...   ...  ...  ...       ...       ...   ...     ...         ...2106       2  20.976842  1.710730  131.408528                               2     2  ...    1  1.676269  0.906247     2       3           72107       2  21.982942  1.748584  133.742943                               2     2  ...    1  1.341390  0.599270     2       3           72108       2  22.524036  1.752206  133.689352                               2     2  ...    1  1.414209  0.646288     2       3           72109       2  24.361936  1.739450  133.346641                               2     2  ...    1  1.139107  0.586035     2       3           72110       2  23.664709  1.738836  133.472641                               2     2  ...    1  1.026452  0.714137     2       3           7
-[2111 rows x 17 columns]     
+      Gender        Age    Height      Weight  family_history_with_overweight  ...       FAF       TUE  CALC  MTRANS  NObeyesdad
+0          2  21.000000  1.620000   64.000000                               2  ...  0.000000  1.000000     1       3
+2
+1          2  21.000000  1.520000   56.000000                               2  ...  3.000000  0.000000     2       3
+2
+2          1  23.000000  1.800000   77.000000                               2  ...  2.000000  1.000000     3       3
+2
+3          1  27.000000  1.800000   87.000000                               1  ...  2.000000  0.000000     3       2
+3
+4          1  22.000000  1.780000   89.800000                               1  ...  0.000000  0.000000     2       3
+4
+...      ...        ...       ...         ...                             ...  ...       ...       ...   ...     ...         ...
+2106       2  20.976842  1.710730  131.408528                               2  ...  1.676269  0.906247     2       3
+7
+2107       2  21.982942  1.748584  133.742943                               2  ...  1.341390  0.599270     2       3
+7
+2108       2  22.524036  1.752206  133.689352                               2  ...  1.414209  0.646288     2       3
+7
+2109       2  24.361936  1.739450  133.346641                               2  ...  1.139107  0.586035     2       3
+7
+2110       2  23.664709  1.738836  133.472641                               2  ...  1.026452  0.714137     2       3
+7
+
+[2111 rows x 17 columns]  
 ```
 
 For the other floating type columns, I chose to round the values using the _round()_ function. But I kept the column "Height" with the floating type.
 
 ```
-      Gender  Age  Height  Weight  family_history_with_overweight  FAVC  FCVC  NCP  ...  SMOKE  CH2O  SCC  FAF  TUE  CALC  MTRANS  NObeyesdad
-0          2   21     1.6      64                               2     1     2    3  ...      1     2    1    0    1     1       3
- 2
-1          2   21     1.5      56                               2     1     3    3  ...      2     3    2    3    0     2       3
- 2
-2          1   23     1.8      77                               2     1     2    3  ...      1     2    1    2    1     3       3
- 2
-3          1   27     1.8      87                               1     1     3    3  ...      1     2    1    2    0     3       2
- 3
-4          1   22     1.8      90                               1     1     2    1  ...      1     2    1    0    0     2       3
- 4
-...      ...  ...     ...     ...                             ...   ...   ...  ...  ...    ...   ...  ...  ...  ...   ...     ...         ...
-2106       2   21     1.7     131                               2     2     3    3  ...      1     2    1    2    1     2       3
- 7
-2107       2   22     1.7     134                               2     2     3    3  ...      1     2    1    1    1     2       3
- 7
-2108       2   23     1.8     134                               2     2     3    3  ...      1     2    1    1    1     2       3
- 7
-2109       2   24     1.7     133                               2     2     3    3  ...      1     3    1    1    1     2       3
- 7
-2110       2   24     1.7     133                               2     2     3    3  ...      1     3    1    1    1     2       3
- 7
+   Gender  Age  Height  Weight  family_history_with_overweight  FAVC  FCVC  ...  CH2O  SCC  FAF  TUE  CALC  MTRANS  NObeyesdad
+0          2   21     1.6      64                               2     1     2  ...     2    1    0    1     1       3
+2
+1          2   21     1.5      56                               2     1     3  ...     3    2    3    0     2       3
+2
+2          1   23     1.8      77                               2     1     2  ...     2    1    2    1     3       3
+2
+3          1   27     1.8      87                               1     1     3  ...     2    1    2    0     3       2
+3
+4          1   22     1.8      90                               1     1     2  ...     2    1    0    0     2       3
+4
+...      ...  ...     ...     ...                             ...   ...   ...  ...   ...  ...  ...  ...   ...     ...         ...
+2106       2   21     1.7     131                               2     2     3  ...     2    1    2    1     2       3
+7
+2107       2   22     1.7     134                               2     2     3  ...     2    1    1    1     2       3
+7
+2108       2   23     1.8     134                               2     2     3  ...     2    1    1    1     2       3
+7
+2109       2   24     1.7     133                               2     2     3  ...     3    1    1    1     2       3
+7
+2110       2   24     1.7     133                               2     2     3  ...     3    1    1    1     2       3
+7
 
 [2111 rows x 17 columns]
 ```
@@ -219,7 +241,7 @@ The model is: NObeyesdad = -1.9888 + 0.070014X
 ```
 
 There is a positive correlation between the predictive variable "Weight" and the predicted variable "NObeyesdad":
-![](/Graphics/scatter_weight_faf.png)
+![](/Graphics/LinearRegressionModel.png)
 
 The quality of the model was assessed using the "R²" and the "p-value":
 ```

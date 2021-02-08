@@ -69,6 +69,7 @@ data_encoder['FAF'] = data_encoder['FAF'].apply(lambda faf : round(faf))
 data_encoder['TUE'] = data_encoder['TUE'].apply(lambda tue : round(tue))
 
 print(data_encoder)
+print(data_encoder['NObeyesdad'])
 
 ## Descriptive Analysis
 
