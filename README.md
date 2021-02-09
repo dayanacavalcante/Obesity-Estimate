@@ -288,6 +288,27 @@ The result of the _Cross-Validation_ metric was also satisfactory:
 ```
 0.95 accuracy with a standard deviation of 0.01
 ```
+#### _Clustering_
+
+1. _Centroids-based clustering: K-Means_
+
+In this step of the project, the groups formed by frequency of physical activity ("FAF") and level of body mass index ("NObeyesdad") columns of the data set were analysed. Before applying the _KMeans_ algorithm it was necessary to standardize the data using the _StandardScaler_ method.
+
+##### _Elbow Method_
+
+The _Elbow Method_ was used to find out the number of clusters that was used in KMeans.
+
+![](/Graphics/ElbowMethod.png)
+
+With k=6, the following graph was generated:
+
+![](/Graphics/Kmeans_6.png)
+
+It can be noted that the most worrying group in the sample is the green cluster, which has the highest levels of obesity and the lowest frequency of physical activity.
+
+##### _Performance Metrics_
+
+Through the _silhouette_score_ metrics, there was a return of 0.5 which can be considered an acceptable performance of KMeans.
 
 
 

@@ -11,6 +11,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_absolute_percentage_error
 from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+import scipy.cluster.hierarchy as sch
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.cluster import DBSCAN
+from matplotlib import colors as mcolors
 
 # Load Data
 
@@ -205,7 +212,7 @@ lr.fit(x_train,y_train)
 pred_train = lr.predict(x_train)
 pred_test = lr.predict(x_test)
 
-# Training Performance Metrics
+# Performance Metrics
 
 mae_test = mean_absolute_error(y_test, pred_test)
 mape_test = mean_absolute_percentage_error(y_test, pred_test)
@@ -217,3 +224,106 @@ print('MAPE_test: {}'.format(mape_test))
 result_cv = cross_val_score(lr, x_test, y_test, cv = 10)
 print('Cross Validation: {}'.format(result_cv))
 print("%0.2f accuracy with a standard deviation of %0.2f" % (result_cv.mean(), result_cv.std()))
+
+# Clustering: K-means
+
+Xc = data_encoder.iloc[:, [12,16]].values
+scaler = StandardScaler()
+Xc = scaler.fit_transform(Xc)
+
+print(Xc)
+
+# Elbow Method
+
+wcss = []
+for i in range(1,11):
+    kmeans = KMeans(n_clusters = i, init = 'k-means++', random_state = 0)
+    kmeans.fit(Xc)
+    wcss.append(kmeans.inertia_)
+plt.plot(range(1,11), wcss)
+plt.xlabel('Numbers of Clusters')
+plt.ylabel('WCSS')
+plt.title('Elbow Method')
+plt.show()
+
+k = 6
+kmeans = KMeans(n_clusters = 6, random_state = 0)
+pred_k = kmeans.fit_predict(Xc)
+
+plt.scatter(Xc[pred_k == 0, 0], Xc[pred_k == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
+plt.scatter(Xc[pred_k == 1, 0], Xc[pred_k == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
+plt.scatter(Xc[pred_k == 2, 0], Xc[pred_k == 2, 1], s = 100, c = 'green', label = 'Cluster 3')
+plt.scatter(Xc[pred_k == 3, 0], Xc[pred_k == 3, 1], s = 100, c = 'yellow', label = 'Cluster 4')
+plt.scatter(Xc[pred_k == 4, 0], Xc[pred_k == 4, 1], s = 100, c = 'purple', label = 'Cluster 5')
+plt.scatter(Xc[pred_k == 5, 0], Xc[pred_k == 5, 1], s = 100, c = 'grey', label = 'Cluster 6')
+plt.xlabel('NObeyesdad')
+plt.ylabel('FAF')
+plt.title('KMeans_Clusters')
+plt.legend()
+plt.show()
+
+# Performance Metrics
+
+kmeans_metrics = silhouette_score(Xc, kmeans.labels_, metric = 'euclidean')
+print('The Silhouette_Score of K-means is: {}'.format(kmeans_metrics))
+"""
+# Clustering: Hierarchical
+
+Xc = data_encoder.iloc[:, [12,16]].values
+scaler = StandardScaler()
+Xc = scaler.fit_transform(Xc)
+
+hc = sch.dendrogram(sch.linkage(Xc, method = 'ward'))
+plt.title('Dendrogram')
+plt.xlabel('Sample')
+plt.ylabel('Euclidean Distances')
+plt.show()
+
+hc = AgglomerativeClustering(n_clusters = 3, affinity = 'euclidean', linkage = 'ward' )
+pred_h = hc.fit_predict(Xc)
+
+plt.scatter(Xc[pred_h == 0, 0], Xc[pred_h == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
+plt.scatter(Xc[pred_h == 1, 0], Xc[pred_h == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
+plt.scatter(Xc[pred_h == 2, 0], Xc[pred_h == 2, 1], s = 100, c = 'green', label = 'Cluster 3')
+plt.xlabel('NObeyesdad')
+plt.ylabel('FAF')
+plt.title('Hierarchical_Clusters')
+plt.legend()
+plt.show()
+
+# Performance Metrics
+
+hc_metrics = silhouette_score(Xc, hc.labels_, metric = 'euclidean')
+print('The Silhouette_Score of Hierarchical is: {}'.format(hc_metrics))
+
+# Clustering: DBSCAN
+
+Xc = data_encoder.iloc[:, [12,16]].values
+scaler = StandardScaler()
+Xc = scaler.fit_transform(Xc)
+
+dbscan = DBSCAN(eps = .5, min_samples = 15)
+dbscan.fit(Xc)
+pred_d = dbscan.labels_
+print(pred_d)
+
+
+colors = dict(mcolors.BASE_COLORS, **mcolors.CSS4_COLORS)
+for name, color in colors.items():
+    print(name, color)
+
+plt.scatter(Xc[pred_d == 0, 0], Xc[pred_d == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
+plt.scatter(Xc[pred_d == 1, 0], Xc[pred_d == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
+plt.scatter(Xc[pred_d == 2, 0], Xc[pred_d == 2, 1], s = 100, c = 'green', label = 'Cluster 3')
+plt.scatter(Xc[pred_d == 3, 0], Xc[pred_d == 3, 1], s = 100, c = 'yellow', label = 'Cluster 4')
+plt.xlabel('NObeyesdad')
+plt.ylabel('FAF')
+plt.title('DBSCAN')
+plt.legend()
+plt.show()
+
+# Performance Metrics
+
+dbscan_metrics = silhouette_score(Xc, dbscan.labels_, metric = 'euclidean')
+print('The Silhouette_Score of DBSCAN is: {}'.format(dbscan_metrics))
+"""
