@@ -302,7 +302,7 @@ The _Elbow Method_ was used to find out the number of clusters that was used in 
 
 With k=6, the following graph was generated:
 
-![](/Graphics/Kmeans_6.png)
+![](/Graphics/kmeans_6.png)
 
 It can be noted that the most worrying group in the sample is the green cluster, which has the highest levels of obesity and the lowest frequency of physical activity.
 
