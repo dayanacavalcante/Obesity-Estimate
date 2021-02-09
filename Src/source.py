@@ -262,6 +262,13 @@ plt.title('KMeans_Clusters')
 plt.legend()
 plt.show()
 
+data_kmeans = data.copy()
+data_kmeans['Cluster'] = pred_k
+print(data_kmeans.head())
+
+boolArray = data_kmeans['Cluster'] == 3
+print(data_kmeans[boolArray])
+
 # Performance Metrics
 
 kmeans_metrics = silhouette_score(Xc, kmeans.labels_, metric = 'euclidean')

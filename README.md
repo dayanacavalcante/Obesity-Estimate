@@ -304,7 +304,23 @@ With k=6, the following graph was generated:
 
 ![](/Graphics/kmeans_6.png)
 
-It can be noted that the most worrying group in the sample is the green cluster, which has the highest levels of obesity and the lowest frequency of physical activity.
+It can be noted that the most worrying group in the sample is the green cluster, which has the highest levels of obesity and the lowest frequency of physical activity. There are 387 people in the green cluster, as shown below:
+```
+      Gender        Age    Height      Weight  ...        CALC                 MTRANS        NObeyesdad  Cluster
+17    Female  29.000000  1.530000   78.000000  ...          no             Automobile    Obesity_Type_I        3
+21    Female  52.000000  1.690000   87.000000  ...          no             Automobile    Obesity_Type_I        3
+23    Female  22.000000  1.600000   82.000000  ...   Sometimes  Public_Transportation    Obesity_Type_I        3
+67      Male  23.000000  1.650000   95.000000  ...  Frequently             Automobile    Obesity_Type_I        3
+68      Male  30.000000  1.760000  112.000000  ...  Frequently             Automobile   Obesity_Type_II        3
+...      ...        ...       ...         ...  ...         ...                    ...               ...      ...
+2098  Female  25.992348  1.606474  104.954291  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
+2099  Female  25.974446  1.628855  108.090006  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
+2100  Female  25.777565  1.628205  107.378702  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
+2101  Female  25.722004  1.628470  107.218949  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
+2102  Female  25.765628  1.627839  108.107360  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
+
+[387 rows x 18 columns]
+```
 
 ##### _Performance Metrics_
 
