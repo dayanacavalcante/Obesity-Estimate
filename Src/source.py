@@ -264,12 +264,10 @@ print(data_kmeans[boolArray])
 kmeans_metrics = silhouette_score(Xc, kmeans.labels_, metric = 'euclidean')
 print('The Silhouette_Score of K-means is: {}'.format(kmeans_metrics))
 
-"""
-# Clustering: Hierarchical
+
+# Clustering: Agglomerative Hierarchical
 
 Xc = data_encoder.iloc[:, [12,16]].values
-scaler = StandardScaler()
-Xc = scaler.fit_transform(Xc)
 
 hc = sch.dendrogram(sch.linkage(Xc, method = 'ward'))
 plt.title('Dendrogram')
@@ -277,23 +275,27 @@ plt.xlabel('Sample')
 plt.ylabel('Euclidean Distances')
 plt.show()
 
-hc = AgglomerativeClustering(n_clusters = 3, affinity = 'euclidean', linkage = 'ward' )
+hc = AgglomerativeClustering(n_clusters = 2, affinity = 'euclidean', linkage = 'ward' )
 pred_h = hc.fit_predict(Xc)
 
-plt.scatter(Xc[pred_h == 0, 0], Xc[pred_h == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
-plt.scatter(Xc[pred_h == 1, 0], Xc[pred_h == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
-plt.scatter(Xc[pred_h == 2, 0], Xc[pred_h == 2, 1], s = 100, c = 'green', label = 'Cluster 3')
-plt.xlabel('NObeyesdad')
-plt.ylabel('FAF')
-plt.title('Hierarchical_Clusters')
-plt.legend()
+sns.scatterplot(data = data_encoder, x = 'NObeyesdad', y = 'FAF', hue = pred_h, palette = "deep", s = 100)
+plt.legend(bbox_to_anchor=(1.01, 1),borderaxespad=0)
+plt.title("Hierarchical")
 plt.show()
+
+data_hc = data.copy()
+data_hc['Cluster'] = pred_h
+print(data_hc.head())
+
+boolArrayhc = data_hc['Cluster'] == 0
+print(data_hc[boolArrayhc])
 
 # Performance Metrics
 
 hc_metrics = silhouette_score(Xc, hc.labels_, metric = 'euclidean')
 print('The Silhouette_Score of Hierarchical is: {}'.format(hc_metrics))
 
+"""
 # Clustering: DBSCAN
 
 Xc = data_encoder.iloc[:, [12,16]].values

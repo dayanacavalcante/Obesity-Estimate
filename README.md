@@ -327,6 +327,42 @@ Through the _silhouette_score_ metrics, there was a return of approximately 0.5 
 ```
 The Silhouette_Score of K-means is: 0.4979439571648936
 ```
+2. _Connectivity clustering: Agglomerative Hierarchical_
+
+To know the number of clusters that was used in this algorithm, I applied the _Dendrogram_ method.
+
+##### _Dendrogram_
+
+![](/Graphics/Dendrogram_2.png)
+
+The number of clusters used was 2.
+
+![](/Graphics/Hierarchical_2.png)
+
+According to the graph, the risk group in the sample is the blue cluster or zero cluster. This cluster represents 1342 people, as shown below:
+```
+      Gender        Age    Height      Weight  ...        CALC                 MTRANS           NObeyesdad  Cluster
+3       Male  27.000000  1.800000   87.000000  ...  Frequently                Walking   Overweight_Level_I        0
+4       Male  22.000000  1.780000   89.800000  ...   Sometimes  Public_Transportation  Overweight_Level_II        0
+10      Male  26.000000  1.850000  105.000000  ...   Sometimes  Public_Transportation       Obesity_Type_I        0
+11    Female  21.000000  1.720000   80.000000  ...   Sometimes  Public_Transportation  Overweight_Level_II        0
+13      Male  41.000000  1.800000   99.000000  ...  Frequently             Automobile       Obesity_Type_I        0
+...      ...        ...       ...         ...  ...         ...                    ...                  ...      ...
+2106  Female  20.976842  1.710730  131.408528  ...   Sometimes  Public_Transportation     Obesity_Type_III        0
+2107  Female  21.982942  1.748584  133.742943  ...   Sometimes  Public_Transportation     Obesity_Type_III        0
+2108  Female  22.524036  1.752206  133.689352  ...   Sometimes  Public_Transportation     Obesity_Type_III        0
+2109  Female  24.361936  1.739450  133.346641  ...   Sometimes  Public_Transportation     Obesity_Type_III        0
+2110  Female  23.664709  1.738836  133.472641  ...   Sometimes  Public_Transportation     Obesity_Type_III        0
+
+[1342 rows x 18 columns]
+```
+##### _Performance Metrics_
+
+Through the _silhouette_score_ metrics, there was a return of approximately 0.5 which can be considered an acceptable performance of Agglomerative Hierarchical.
+```
+The Silhouette_Score of Hierarchical is: 0.4907216842031665
+```
+
 
 
 
