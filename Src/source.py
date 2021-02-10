@@ -11,13 +11,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_absolute_percentage_error
 from sklearn.model_selection import cross_val_score
-from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import scipy.cluster.hierarchy as sch
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.cluster import DBSCAN
-from matplotlib import colors as mcolors
 
 # Load Data
 
@@ -228,8 +226,6 @@ print("%0.2f accuracy with a standard deviation of %0.2f" % (result_cv.mean(), r
 # Clustering: K-means
 
 Xc = data_encoder.iloc[:, [12,16]].values
-scaler = StandardScaler()
-Xc = scaler.fit_transform(Xc)
 
 print(Xc)
 
@@ -246,33 +242,28 @@ plt.ylabel('WCSS')
 plt.title('Elbow Method')
 plt.show()
 
-k = 6
-kmeans = KMeans(n_clusters = 6, random_state = 0)
+k = 7
+kmeans = KMeans(n_clusters = 7, random_state = 0)
 pred_k = kmeans.fit_predict(Xc)
+print(pred_k)
 
-plt.scatter(Xc[pred_k == 0, 0], Xc[pred_k == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
-plt.scatter(Xc[pred_k == 1, 0], Xc[pred_k == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
-plt.scatter(Xc[pred_k == 2, 0], Xc[pred_k == 2, 1], s = 100, c = 'green', label = 'Cluster 3')
-plt.scatter(Xc[pred_k == 3, 0], Xc[pred_k == 3, 1], s = 100, c = 'yellow', label = 'Cluster 4')
-plt.scatter(Xc[pred_k == 4, 0], Xc[pred_k == 4, 1], s = 100, c = 'purple', label = 'Cluster 5')
-plt.scatter(Xc[pred_k == 5, 0], Xc[pred_k == 5, 1], s = 100, c = 'grey', label = 'Cluster 6')
-plt.xlabel('NObeyesdad')
-plt.ylabel('FAF')
-plt.title('KMeans_Clusters')
-plt.legend()
+sns.scatterplot(data = data_encoder, x = 'NObeyesdad', y = 'FAF', hue = pred_k, palette = "deep", s = 100)
+plt.legend(bbox_to_anchor=(1.01, 1),borderaxespad=0)
+plt.title("KMeans")
 plt.show()
 
 data_kmeans = data.copy()
 data_kmeans['Cluster'] = pred_k
 print(data_kmeans.head())
 
-boolArray = data_kmeans['Cluster'] == 3
+boolArray = data_kmeans['Cluster'] == 4
 print(data_kmeans[boolArray])
 
 # Performance Metrics
 
 kmeans_metrics = silhouette_score(Xc, kmeans.labels_, metric = 'euclidean')
 print('The Silhouette_Score of K-means is: {}'.format(kmeans_metrics))
+
 """
 # Clustering: Hierarchical
 
@@ -314,10 +305,15 @@ dbscan.fit(Xc)
 pred_d = dbscan.labels_
 print(pred_d)
 
+colors = plt.cm.rainbow(np.linspace(0, 1, len(Xc)))
+for i in range(len(Xc)):
+    plt.plot(Xc[i][0], Xc[i][1], colors[pred_d[i]], markersize = 15)
+    plt.xlabel('NObeyesdad')
+    plt.ylabel('FAF')
+    plt.title('DBSCAN')
+    plt.legend()
+    plt.show()
 
-colors = dict(mcolors.BASE_COLORS, **mcolors.CSS4_COLORS)
-for name, color in colors.items():
-    print(name, color)
 
 plt.scatter(Xc[pred_d == 0, 0], Xc[pred_d == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
 plt.scatter(Xc[pred_d == 1, 0], Xc[pred_d == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')

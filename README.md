@@ -292,7 +292,7 @@ The result of the _Cross-Validation_ metric was also satisfactory:
 
 1. _Centroids-based clustering: K-Means_
 
-In this step of the project, the groups formed by frequency of physical activity ("FAF") and level of body mass index ("NObeyesdad") columns of the data set were analysed. Before applying the _KMeans_ algorithm it was necessary to standardize the data using the _StandardScaler_ method.
+In this step of the project, the groups formed by frequency of physical activity ("FAF") and level of body mass index ("NObeyesdad") columns of the data set were analysed. 
 
 ##### _Elbow Method_
 
@@ -300,41 +300,33 @@ The _Elbow Method_ was used to find out the number of clusters that was used in 
 
 ![](/Graphics/ElbowMethod.png)
 
-With k=6, the following graph was generated:
+According to the graph I could choose the value of k between 6 and 8. I chose k = 7.
 
-![](/Graphics/kmeans_6.png)
+![](/Graphics/kmeans.png)
 
-It can be noted that the most worrying group in the sample is the green cluster, which has the highest levels of obesity and the lowest frequency of physical activity. There are 387 people in the green cluster, as shown below:
+It can be seen that the most worrying group in the sample is Cluster 4, which has the highest rates of obesity and does not practice physical activity. There are 256 people in the purple cluster, as shown below:
 ```
       Gender        Age    Height      Weight  ...        CALC                 MTRANS        NObeyesdad  Cluster
-17    Female  29.000000  1.530000   78.000000  ...          no             Automobile    Obesity_Type_I        3
-21    Female  52.000000  1.690000   87.000000  ...          no             Automobile    Obesity_Type_I        3
-23    Female  22.000000  1.600000   82.000000  ...   Sometimes  Public_Transportation    Obesity_Type_I        3
-67      Male  23.000000  1.650000   95.000000  ...  Frequently             Automobile    Obesity_Type_I        3
-68      Male  30.000000  1.760000  112.000000  ...  Frequently             Automobile   Obesity_Type_II        3
+68      Male  30.000000  1.760000  112.000000  ...  Frequently             Automobile   Obesity_Type_II        4
+197     Male  41.000000  1.750000  118.000000  ...   Sometimes                   Bike   Obesity_Type_II        4
+202   Female  26.000000  1.560000  102.000000  ...   Sometimes  Public_Transportation  Obesity_Type_III        4
+210     Male  20.000000  1.800000  114.000000  ...          no  Public_Transportation   Obesity_Type_II        4
+229     Male  32.000000  1.750000  120.000000  ...          no             Automobile   Obesity_Type_II        4
 ...      ...        ...       ...         ...  ...         ...                    ...               ...      ...
-2098  Female  25.992348  1.606474  104.954291  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
-2099  Female  25.974446  1.628855  108.090006  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
-2100  Female  25.777565  1.628205  107.378702  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
-2101  Female  25.722004  1.628470  107.218949  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
-2102  Female  25.765628  1.627839  108.107360  ...   Sometimes  Public_Transportation  Obesity_Type_III        3
+2098  Female  25.992348  1.606474  104.954291  ...   Sometimes  Public_Transportation  Obesity_Type_III        4
+2099  Female  25.974446  1.628855  108.090006  ...   Sometimes  Public_Transportation  Obesity_Type_III        4
+2100  Female  25.777565  1.628205  107.378702  ...   Sometimes  Public_Transportation  Obesity_Type_III        4
+2101  Female  25.722004  1.628470  107.218949  ...   Sometimes  Public_Transportation  Obesity_Type_III        4
+2102  Female  25.765628  1.627839  108.107360  ...   Sometimes  Public_Transportation  Obesity_Type_III        4
 
-[387 rows x 18 columns]
+[256 rows x 18 columns]
 ```
-
 ##### _Performance Metrics_
 
-Through the _silhouette_score_ metrics, there was a return of 0.5 which can be considered an acceptable performance of KMeans.
-
-
-
-
-
-
-
-
-
-
+Through the _silhouette_score_ metrics, there was a return of approximately 0.5 which can be considered an acceptable performance of KMeans.
+```
+The Silhouette_Score of K-means is: 0.4979439571648936
+```
 
 
 
