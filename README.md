@@ -32,7 +32,7 @@ The Pandas library was used to load and manipulate the data. When loading the da
 
 One of the most time-consuming steps when working with Machine Learning models is data processing. It is also essential to understand the conclusions that can be drawn from the data. 
 
-Analyzing the level of body mass index ("NObeyesdad") with the columns "Weight" and Frequency of Physical Activity ("FAF"), it can be seen that there is a variation in the frequency of physical activity by the sample classified with "Insufficient Weight", "Normal Weight", "Overweight Level I", "Overweight Level II" and the sample classified with “Obesity Type II” and “Obesity Type III” also practice physical activity, mostly, but no more than two to four times a week.
+Analyzing the level of body mass index ("NObeyesdad") with the columns "Weight" and Frequency of Physical Activity ("FAF"), it can be seen that there is a variation in the frequency of physical activity by the sample classified with "Insufficient Weight", "Normal Weight", "Overweight Level I", "Overweight Level II" and "Obesity Type I". The sample classified with “Obesity Type II” and “Obesity Type III” also practice physical activity, mostly, but no more than two to four times a week.
 
 ![](/Graphics/scatter_weight_faf.png)
 
