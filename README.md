@@ -233,9 +233,9 @@ Now no more outliers are now seen in the box plot chart:
 | ![](/Charts/boxplot_age.png) | ![](/Charts/boxplot_weight.png)|
 |:-:|:-:|
 
-### _Linear Regression_
+### _Regression_
 
-The Linear Regression algorithm was applied to make the model for predicting the level of body mass index ("NObeyesdad") according to weight.
+In the first predictive method of the project the Linear Regression algorithm was applied to make the model for predicting the level of body mass index ("NObeyesdad") according to weight.
 
 The model created was: 
 ```
@@ -292,7 +292,7 @@ The result of the _Cross-Validation_ metric was also satisfactory:
 ```
 ### _Clustering_
 
-In this step of the project, the groups with the highest risk were identified, according to the level of body mass index ("NObeyesdad") and the Frequency of Physical Activity ("FAF") performed per week.
+In this stage of the project, the descriptive method was approached through clustering, identifying the groups at greatest risk, according to the level of body mass index ("NObeyesdad") and the frequency of physical activity ("FAF") performed per week .
 
 1. _Centroids-based clustering: K-Means_
 
@@ -368,7 +368,7 @@ The Silhouette_Score of Hierarchical is: 0.4907216842031665
 ```
 ### _Classification_
 
-In the second predictive method of the project, the _Logistic Regression_, _Decision Tree_ and _Random Forest_ algorithms were applied.
+In the second predictive method of the project the _Logistic Regression_, _Decision Tree_ and _Random Forest_ algorithms were applied.
 
 ##### _Performance Metrics_
 
