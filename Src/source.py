@@ -159,6 +159,7 @@ plt.figure(figsize=(8,6))
 sns.boxplot(y = "Age", data = data_iqr)
 plt.show()
 
+# Regression
 # Creating the Linear Regression Model with "Weight" and "NObeyesdad" columns.
 
 X = data_iqr['Weight'].values.reshape(-1,1)
@@ -299,7 +300,6 @@ print(data_hc[boolArrayhc])
 hc_metrics = silhouette_score(Xc, hc.labels_, metric = 'euclidean')
 print('The Silhouette_Score of Hierarchical is: {}'.format(hc_metrics))
 
-"""
 # Clustering: DBSCAN
 
 Xc = data_encoder.iloc[:, [12,16]].values
@@ -309,20 +309,24 @@ dbscan.fit(Xc)
 pred_d = dbscan.labels_
 print(pred_d)
 
+sns.relplot(x = 'NObeyesdad', y = 'FAF', hue = pred_d, data = data_encoder, palette = ["black", "dimgray", "bisque", "darkorange", "burlywood", 
+"forestgreen", "limegreen", "darkgreen", "slategrey", "lightsteelblue", "cornflowerblue", "rosybrown", "lightcoral", "indianred", "darkgoldenrod",
+"goldenrod", "cornsilk", "lightseagreen", "mediumturquoise", "darkslategray", "mediumpurple", "rebeccapurple", "blueviolet", "palevioletred", "crimson",
+"pink"], s = 100)
+plt.title("DBSCAN")
+plt.show()
+
 data_d = data.copy()
 data_d['Cluster'] = pred_d
 print(data_d.head())
 
-sns.scatterplot(data = data_encoder, x = 'NObeyesdad', y = 'FAF', hue = pred_d, size = pred_d, palette = "deep", s = 100)
-plt.legend(bbox_to_anchor=(1.01, 1),borderaxespad=0)
-plt.title("DBSCAN")
-plt.show()
+boolArraydb = data_d['Cluster'] == 22
+print(data_d[boolArraydb])
 
 # Performance Metrics
 
 dbscan_metrics = silhouette_score(Xc, dbscan.labels_, metric = 'euclidean')
 print('The Silhouette_Score of DBSCAN is: {}'.format(dbscan_metrics))
-"""
 
 # Classification
 # Training the model with the data set
