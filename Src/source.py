@@ -16,6 +16,11 @@ from sklearn.metrics import silhouette_score
 import scipy.cluster.hierarchy as sch
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.cluster import DBSCAN
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+from sklearn.metrics import confusion_matrix
 
 # Load Data
 
@@ -24,8 +29,6 @@ print(data)
 
 # EDA
 ## Data Processing
-
-print(data.info())
 
 """
 Plot Weight vs FAF 
@@ -46,6 +49,8 @@ for n in range(len(labels)):
 plt.xlabel('Weight')
 plt.ylabel('FAF')
 plt.legend()
+
+print(data.info())
 
 # Applying Ordinal Encoder 
 encoder = ce.OrdinalEncoder(mapping = [{'col':'Gender','mapping':{'Male':1,'Female':2}},
@@ -197,18 +202,18 @@ ylr = data_iqr['NObeyesdad']
 
 # Separating training and test data
 
-x_train, x_test, y_train, y_test = train_test_split(Xlr,ylr,test_size = .3, random_state=1)
+X_train, X_test, y_train, y_test = train_test_split(Xlr,ylr,test_size = .3, random_state=1)
 
-print(x_train)
+print(X_train)
 print(y_train)
 
 # Model Training
 
 lr = LinearRegression()
-lr.fit(x_train,y_train)
+lr.fit(X_train,y_train)
 
-pred_train = lr.predict(x_train)
-pred_test = lr.predict(x_test)
+pred_train = lr.predict(X_train)
+pred_test = lr.predict(X_test)
 
 # Performance Metrics
 
@@ -219,7 +224,7 @@ print('MAPE_test: {}'.format(mape_test))
 
 # Cross Validation
 
-result_cv = cross_val_score(lr, x_test, y_test, cv = 10)
+result_cv = cross_val_score(lr, X_test, y_test, cv = 10)
 print('Cross Validation: {}'.format(result_cv))
 print("%0.2f accuracy with a standard deviation of %0.2f" % (result_cv.mean(), result_cv.std()))
 
@@ -264,7 +269,6 @@ print(data_kmeans[boolArray])
 kmeans_metrics = silhouette_score(Xc, kmeans.labels_, metric = 'euclidean')
 print('The Silhouette_Score of K-means is: {}'.format(kmeans_metrics))
 
-
 # Clustering: Agglomerative Hierarchical
 
 Xc = data_encoder.iloc[:, [12,16]].values
@@ -299,32 +303,19 @@ print('The Silhouette_Score of Hierarchical is: {}'.format(hc_metrics))
 # Clustering: DBSCAN
 
 Xc = data_encoder.iloc[:, [12,16]].values
-scaler = StandardScaler()
-Xc = scaler.fit_transform(Xc)
 
 dbscan = DBSCAN(eps = .5, min_samples = 15)
 dbscan.fit(Xc)
 pred_d = dbscan.labels_
 print(pred_d)
 
-colors = plt.cm.rainbow(np.linspace(0, 1, len(Xc)))
-for i in range(len(Xc)):
-    plt.plot(Xc[i][0], Xc[i][1], colors[pred_d[i]], markersize = 15)
-    plt.xlabel('NObeyesdad')
-    plt.ylabel('FAF')
-    plt.title('DBSCAN')
-    plt.legend()
-    plt.show()
+data_d = data.copy()
+data_d['Cluster'] = pred_d
+print(data_d.head())
 
-
-plt.scatter(Xc[pred_d == 0, 0], Xc[pred_d == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
-plt.scatter(Xc[pred_d == 1, 0], Xc[pred_d == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
-plt.scatter(Xc[pred_d == 2, 0], Xc[pred_d == 2, 1], s = 100, c = 'green', label = 'Cluster 3')
-plt.scatter(Xc[pred_d == 3, 0], Xc[pred_d == 3, 1], s = 100, c = 'yellow', label = 'Cluster 4')
-plt.xlabel('NObeyesdad')
-plt.ylabel('FAF')
-plt.title('DBSCAN')
-plt.legend()
+sns.scatterplot(data = data_encoder, x = 'NObeyesdad', y = 'FAF', hue = pred_d, size = pred_d, palette = "deep", s = 100)
+plt.legend(bbox_to_anchor=(1.01, 1),borderaxespad=0)
+plt.title("DBSCAN")
 plt.show()
 
 # Performance Metrics
@@ -332,3 +323,73 @@ plt.show()
 dbscan_metrics = silhouette_score(Xc, dbscan.labels_, metric = 'euclidean')
 print('The Silhouette_Score of DBSCAN is: {}'.format(dbscan_metrics))
 """
+
+# Classification
+# Training the model with the data set
+
+Xlor = data_iqr.drop(['NObeyesdad'], axis = 1)
+ylor = data_iqr['NObeyesdad']
+
+# Separating training and test data
+
+X_train, X_test, y_train, y_test = train_test_split(Xlor,ylor,test_size = .3, random_state=1)
+
+# Logistic Regression Classifier
+
+lor = LogisticRegression()
+lor.fit(X_train,y_train)
+
+pred_train_lor = lor.predict(X_train)
+pred_test_lor = lor.predict(X_test)
+
+print('Accuracy of Logistic Regression Classifier on test set: {:.2f}'.format(lor.score(X_test,y_test)))
+print('Accuracy of Logistic Regression Classifier on train set: {:.2f}'.format(lor.score(X_train,y_train)))
+
+# Confusion Matrix
+
+cmlr = confusion_matrix(y_test, pred_test_lor)
+sns.heatmap(cmlr,annot=True,fmt='g',cmap=plt.cm.Blues)
+plt.title("Logistic Regression Confusion Matrix")
+plt.xlabel("Predict")
+plt.ylabel("Real")
+plt.show()
+
+# Decision Tree Classifier
+
+tree = DecisionTreeClassifier()
+tree.fit(X_train,y_train)
+
+pred_train_tree = tree.predict(X_train)
+pred_test_tree = tree.predict(X_test)
+
+print('Accuracy of Decision Tree Classifier on test set: {:.2f}'.format(tree.score(X_test,y_test)))
+print('Accuracy of Decision Tree Classifier on train set: {:.2f}'.format(tree.score(X_train,y_train)))
+
+# Confusion Matrix
+
+cmdt = confusion_matrix(y_test, pred_test_tree)
+sns.heatmap(cmdt,annot=True,fmt='g',cmap=plt.cm.Blues)
+plt.title("Decision Tree Confusion Matrix")
+plt.xlabel("Predict")
+plt.ylabel("Real")
+plt.show()
+
+# Random Forest Classifier
+
+rf = RandomForestClassifier()
+rf.fit(X_train,y_train)
+
+pred_train_rf = rf.predict(X_train)
+pred_test_rf = rf.predict(X_test)
+
+print('Accuracy of Random Forest Classifier on test set: {:.2f}'.format(rf.score(X_test,y_test)))
+print('Accuracy of Random Forest Classifier on train set: {:.2f}'.format(rf.score(X_train,y_train)))
+
+# Confusion Matrix
+
+cmrf = confusion_matrix(y_test, pred_test_rf)
+sns.heatmap(cmrf,annot=True,fmt='g',cmap=plt.cm.Blues)
+plt.title("Random Forest Confusion Matrix")
+plt.xlabel("Predict")
+plt.ylabel("Real")
+plt.show()

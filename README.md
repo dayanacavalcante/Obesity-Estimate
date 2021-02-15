@@ -34,7 +34,7 @@ One of the most time-consuming steps when working with Machine Learning models i
 
 Analyzing the level of body mass index ("NObeyesdad") with the columns "Weight" and Frequency of Physical Activity ("FAF"), it can be seen that there is a variation in the frequency of physical activity by the sample classified with "Insufficient Weight", "Normal Weight", "Overweight Level I", "Overweight Level II" and "Obesity Type I". The sample classified with “Obesity Type II” and “Obesity Type III” also practice physical activity, mostly, but no more than two to four times a week.
 
-![](/Graphics/scatter_weight_faf.png)
+![](/Charts/scatter_weight_faf.png)
 
 Through the _info()_ function it is verified that there are not no missing values and the data types.
 
@@ -127,7 +127,7 @@ For the other floating type columns, I chose to round the values using the _roun
 
 Time to briefly describe the content of the data!
 
-![](/Graphics/distplot.png)
+![](/Charts/distplot.png)
 
 1. **Gender**: the genders are balanced;
 2. **Age**: there is a predominance in the age group below 30;
@@ -215,7 +215,7 @@ dtype: float64
 
 Through the seaborn heatmap the relationships between the variables can be analyzed. It shows us a strong relationship between the variables "Weight" and "NObeyesdad" and a considerable relationship between "Age" and "MTRANS".
 
-![](/Graphics/heatmap.png)
+![](/Charts/heatmap.png)
 
 ### _Outlier Detection_
 
@@ -223,17 +223,17 @@ One of the most important parts of Exploratory Data Analysis (EAD) is the detect
 
 I used box plot for data visualization. And it can be seen that there is a high number of outliers in the "Age" column.
 
-![](/Graphics/boxplot.png)
+![](/Charts/boxplot.png)
 
 ### _IQR_
 
 Before starting Machine Learning, I treated the outliers of the "Weight" and "Age" columns using the technique based on the interquartile range (IQR) that to identify the upper and lower limits of the data and removing values above and below the limits. 
 
 Now no more outliers are now seen in the box plot chart:
-| ![](/Graphics/boxplot_age.png) | ![](/Graphics/boxplot_weight.png)|
+| ![](/Charts/boxplot_age.png) | ![](/Charts/boxplot_weight.png)|
 |:-:|:-:|
 
-#### _Linear Regression_
+### _Linear Regression_
 
 The Linear Regression algorithm was applied to make the model for predicting the level of body mass index ("NObeyesdad") according to weight.
 
@@ -243,7 +243,7 @@ The model is: NObeyesdad = -1.9888 + 0.070014X
 ```
 
 There is a positive correlation between the predictive variable "Weight" and the predicted variable "NObeyesdad":
-![](/Graphics/LinearRegressionModel.png)
+![](/Charts/LinearRegressionModel.png)
 
 The quality of the model was assessed using the "R²" and the "p-value":
 ```
@@ -290,7 +290,7 @@ The result of the _Cross-Validation_ metric was also satisfactory:
 ```
 0.95 accuracy with a standard deviation of 0.01
 ```
-#### _Clustering_
+### _Clustering_
 
 In this step of the project, the groups with the highest risk were identified, according to the level of body mass index ("NObeyesdad") and the Frequency of Physical Activity ("FAF") performed per week.
 
@@ -302,11 +302,11 @@ Before applying the algorithm, it is necessary to define a ‘K’, that is, a n
 
 The _Elbow Method_ was used to find out the number of clusters that was used in KMeans.
 
-![](/Graphics/ElbowMethod.png)
+![](/Charts/ElbowMethod.png)
 
 According to the graph I could choose the value of k between 6 and 8. I chose k = 7.
 
-![](/Graphics/kmeans.png)
+![](/Charts/kmeans.png)
 
 It can be seen that the most worrying group in the sample is Cluster 4, which has the highest rates of obesity and does not practice physical activity. There are 256 people in the purple cluster, as shown below:
 ```
@@ -337,11 +337,11 @@ To know the number of clusters that was used in this algorithm, I applied the _D
 
 ##### _Dendrogram_
 
-![](/Graphics/Dendrogram_2.png)
+![](/Charts/Dendrogram_2.png)
 
 The number of clusters used was 2.
 
-![](/Graphics/Hierarchical_2.png)
+![](/Charts/Hierarchical_2.png)
 
 According to the graph, the risk group in the sample is the blue cluster or zero cluster. This cluster represents 1342 people, as shown below:
 ```
@@ -366,6 +366,32 @@ Through the _silhouette_score_ metrics, there was a return of approximately 0.5 
 ```
 The Silhouette_Score of Hierarchical is: 0.4907216842031665
 ```
+### _Classification_
+
+In the second predictive method of the project, the _Logistic Regression_, _Decision Tree_ and _Random Forest_ algorithms were applied.
+
+##### _Performance Metrics_
+
+Below the _Accuracy_ results of the models:
+
+```
+Accuracy of Logistic Regression Classifier on test set: 0.69
+Accuracy of Logistic Regression Classifier on train set: 0.72
+```
+```
+Accuracy of Decision Tree Classifier on test set: 0.91
+Accuracy of Decision Tree Classifier on train set: 1.00
+```
+```
+Accuracy of Random Forest Classifier on test set: 0.92
+Accuracy of Random Forest Classifier on train set: 1.00
+```
+As a complement to the _Accuracy_, the _Confusion Matrix_ was applied to confirm the performance of the models.
+| ![](/Charts/LogisticRegressionConfusionMatrix.png) | ![](/Charts/DecisionTreeConfusionMatrix.png)| ![](/Charts/RandomForestConfusionMatrix.png)|
+|:-:|:-:|:-:|
+
+As shown in the charts, as in _Accuracy_, the model generated by Random Forest had a better performance.
+
 
 
 
