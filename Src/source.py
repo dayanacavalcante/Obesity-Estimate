@@ -352,7 +352,7 @@ print('Accuracy of Logistic Regression Classifier on train set: {:.2f}'.format(l
 # Confusion Matrix
 
 cmlr = confusion_matrix(y_test, pred_test_lor)
-sns.heatmap(cmlr,annot=True,fmt='g',cmap=plt.cm.Blues)
+sns.heatmap(cmlr,annot=True,fmt='g',cmap="Blues")
 plt.title("Logistic Regression Confusion Matrix")
 plt.xlabel("Predict")
 plt.ylabel("Real")
@@ -372,7 +372,7 @@ print('Accuracy of Decision Tree Classifier on train set: {:.2f}'.format(tree.sc
 # Confusion Matrix
 
 cmdt = confusion_matrix(y_test, pred_test_tree)
-sns.heatmap(cmdt,annot=True,fmt='g',cmap=plt.cm.Blues)
+sns.heatmap(cmdt,annot=True,fmt='g',cmap="Blues")
 plt.title("Decision Tree Confusion Matrix")
 plt.xlabel("Predict")
 plt.ylabel("Real")
@@ -392,7 +392,7 @@ print('Accuracy of Random Forest Classifier on train set: {:.2f}'.format(rf.scor
 # Confusion Matrix
 
 cmrf = confusion_matrix(y_test, pred_test_rf)
-sns.heatmap(cmrf,annot=True,fmt='g',cmap=plt.cm.Blues)
+sns.heatmap(cmrf,annot=True,fmt='g',cmap="Blues")
 plt.title("Random Forest Confusion Matrix")
 plt.xlabel("Predict")
 plt.ylabel("Real")
