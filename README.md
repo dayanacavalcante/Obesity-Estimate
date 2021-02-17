@@ -36,7 +36,7 @@ Analyzing the level of body mass index ("NObeyesdad") with the columns "Weight" 
 
 ![](/Charts/scatter_weight_faf.png)
 
-Through the _info()_ function it is verified that there are not no missing values and the data types.
+Through the _info()_ function it is verified that there are no missing values and the data types.
 
 ```
 <class 'pandas.core.frame.DataFrame'>
@@ -133,18 +133,18 @@ Time to briefly describe the content of the data!
 2. **Age**: there is a predominance in the age group below 30;
 3. **Height**: heights are concentrated in the range of 1.60 to 1.80 meters;
 4. **Weight**: a greater number of people weighing 80 kg;
-5. **Family** history with overweight: a predominance of cases with a family history of overweight;
+5. **Family history with overweight**: a predominance of cases with a family history of overweight;
 6. **FAVC**: predominance of sample with frequent consumption of hypercaloric foods;
 7. **FCVC**: most of the sample answered that they consume vegetables sometimes and always;
 8. **NCP**: predominance of three main meals;
 9. **CAEC**: most of the sample sometimes consumes food between main meals;
 10. **SMOKE**: predominance of nonsmokers;
-11.	**CH2O**: most of the sample consumes between 1 and 2 liters of water per day;
+11. **CH2O**: most of the sample consumes between 1 and 2 liters of water per day;
 12. **SCC**: there is no calorie monitoring by most of the sample;
-13.	**FAF**: most of the sample does physical activity 1 to 2 times a week, followed by the second most who do not perform physical activity;
+13. **FAF**: most of the sample does physical activity 1 to 2 times a week, followed by the second most who do not perform physical activity;
 14. **TUE**: most of the sample spends up to two hours a day using technologies, followed by the second portion that spends three to five hours a day;
 15. **CALC**: most of the sample sometimes drinks alcohol;
-16.	**MTRANS**: most of the sample uses public transport;
+16. **MTRANS**: most of the sample uses public transport;
 17. **NObeyesdad** (body mass index): most of the sample was with some level of obesity;
 
 The _describe()_ function returns descriptive statistics values, as follows:
@@ -165,11 +165,11 @@ max       2.000000    61.000000     2.000000   173.000000  ...     2.000000     
 
 #### _Central Trend Measures_
 
-1. Mean: indicates where the values are concentrated. Focusing on the "Age", "Height" and "Weight" columns, it can be noted that the sample average is 24 years old, 1.70 m and 86 kg.
+1. **Mean**: indicates where the values are concentrated. Focusing on the "Age", "Height" and "Weight" columns, it can be noted that the sample average is 24 years old, 1.70 m and 86 kg.
 
-2. Median and Quantil: the median is the value that separates the top half from the bottom half of a data distribution, or the value at the center of the distribution. The median is a concept less susceptible to large outliers than the average. The 50% quantile is a median by default. Focusing on the "Age", "Height" and "Weight" columns, it can be seen that the median values are 23 years old, 1.70 m and 83 kg.
+2. **Median and Quantil**: the median is the value that separates the top half from the bottom half of a data distribution, or the value at the center of the distribution. The median is a concept less susceptible to large outliers than the average. The 50% quantile is a median by default. Focusing on the "Age", "Height" and "Weight" columns, it can be seen that the median values are 23 years old, 1.70 m and 83 kg.
 
-3. Mode: is the most repeated value in the data. Through the _mode()_ function you can see that it is 21 yeras old, 1,70 m and 80 kg.
+3. **Mode**: is the most repeated value in the data. Through the _mode()_ function you can see that it is 21 yeras old, 1,70 m and 80 kg.
 ```
    Gender  Age  Height  Weight  family_history_with_overweight  FAVC  FCVC  NCP  ...  SMOKE  CH2O  SCC  FAF  TUE  CALC  MTRANS  NObeyesdad
 0       1   21     1.7      80                               2     2     2    3  ...      1     2    1    1    0     2       3           5 
@@ -179,12 +179,12 @@ max       2.000000    61.000000     2.000000   173.000000  ...     2.000000     
 
 #### _Dispersion Measures_
 
-1. Amplitude: difference between the highest and lowest value of the data set. There is a greater variation in the "Weight" column.
+1. **Amplitude**: difference between the highest and lowest value of the data set. There is a greater variation in the "Weight" column.
 - Age: 47;
 - Height: 0.6;
 - Weight: 134;
 
-2. Variance: expressed as the data of a set are far from its expected value. The variance of the "Weight" column is too high.
+2. **Variance**: expressed as the data of a set are far from its expected value. The variance of the "Weight" column is too high.
 ```
 Gender                              0.250083
 Age                                40.412442
@@ -206,7 +206,7 @@ NObeyesdad                          3.940470
 dtype: float64
 ```
 
-3. Standard deviation: indicates how far the data is away from the mean. Again indicating greater attention to the "Age" and "Weight" columns.
+3. **Standard Deviation**: indicates how far the data is away from the mean. Again indicating greater attention to the "Age" and "Weight" columns.
 - Age: 6.3;
 - Height: 0.1;
 - Weight: 26.2;
