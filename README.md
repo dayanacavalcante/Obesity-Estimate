@@ -4,6 +4,8 @@
 
 The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 features and 2111 rows.
 
+Based on this study, I applied predictive methods, such as Classification and Regression, and descriptive methods, with Clustering, to better identify the groups at greatest risk.
+
 The data were taken from the UCI Machine Learning Repository. Follow the link:  
 https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
 
