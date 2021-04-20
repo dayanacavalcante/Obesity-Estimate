@@ -2,16 +2,16 @@
 
 ## **Case Study**
 
-The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 features and 2111 rows.
+Application of predictive methods, through Classification and Regression algorithms and descriptive methods, with Clustering algorithms, to detect and predict the group of people most at risk of life due to obesity.
 
-Based on this study, I applied predictive methods, such as Classification and Regression, and descriptive methods, with Clustering, to better identify the groups at greatest risk.
+The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 features and 2111 rows.
 
 The data were taken from the UCI Machine Learning Repository. Follow the link:  
 https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
 
 ## **Load Data**
 
-The Pandas library was used to load and manipulate the data. When loading the data, it can be seen that there are ordinal and nominal categorical variables and numerical variables with different orders of magnitude.
+The Pandas library was used to load and manipulate the data. It can be seen that there are ordinal and nominal categorical variables and numerical variables with different orders of magnitude.
 ```
       Gender        Age    Height      Weight  ...       TUE        CALC                 MTRANS           NObeyesdad
 0     Female  21.000000  1.620000   64.000000  ...  1.000000          no  Public_Transportation        Normal_Weight
@@ -67,7 +67,7 @@ dtypes: float64(8), object(9)
 memory usage: 206.2+ KB
 ```
 
-There are columns with object and floating data. First, treat the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
+There are columns with object and float data. First, treat the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "CAEC", "CALC" and "NObeyesdad" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
 
 ```
       Gender        Age    Height      Weight  family_history_with_overweight  ...       FAF       TUE  CALC  MTRANS  NObeyesdad
@@ -96,7 +96,7 @@ There are columns with object and floating data. First, treat the object type da
 [2111 rows x 17 columns]  
 ```
 
-For the other floating type columns, I chose to round the values using the _round()_ function. But I kept the column "Height" with the floating type.
+For the other float type columns, I rounded the values using the _round()_ function. But I kept the column "Height" with the float type.
 
 ```
    Gender  Age  Height  Weight  family_history_with_overweight  FAVC  FCVC  ...  CH2O  SCC  FAF  TUE  CALC  MTRANS  NObeyesdad
@@ -277,7 +277,7 @@ Notes:
 ```
 R² is 0.847, this means that approximately 80% of the behavior of the variable "NObeyesdad" is explained by the variable "Weight".
 
-With P> | t | very low, the Null Hypothesis is rejected. The Null Hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to work, it must be false. In general, if the "p-value" is less than 0.05, there is a strong relationship between the variables.
+With P> | t | very low, the Null Hypothesis is rejected. The Null Hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to work, it must be false. Generally if the "p-value" is less than 0.05, there is a strong relationship between the variables.
 
 ##### _Performance Metrics_
 
