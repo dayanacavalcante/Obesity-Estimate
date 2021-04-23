@@ -41,13 +41,16 @@ colors = ['red', 'blue', 'green', 'yellow', 'purple', 'grey', 'orange']
 
 filter = lambda type: data['NObeyesdad'] == type
 
-plt.figure(figsize=(20,16))    
+plt.figure(figsize=(18,7)) 
  
 for n in range(len(labels)):
     plt.scatter(data['Weight'][filter(labels[n])], data['FAF'][filter(labels[n])], color = colors[n], label = labels[n])
 
-plt.xlabel('Weight')
-plt.ylabel('FAF')
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.xlabel('Weight', fontsize=16)
+plt.ylabel('FAF', fontsize=16)
+plt.title('Body Mass Index ("NObeyesdad") plot with "Weight" and Frequency of Physical Activity ("FAF")', fontsize=19)
 plt.legend()
 
 print(data.info())
@@ -153,10 +156,14 @@ print(data_iqr)
 
 plt.figure(figsize=(8,6))
 sns.boxplot(y = "Weight", data = data_iqr)
+plt.yticks(fontsize=14)
+plt.ylabel('Weight', fontsize=16)
 plt.show()
 
 plt.figure(figsize=(8,6))
 sns.boxplot(y = "Age", data = data_iqr)
+plt.yticks(fontsize=14)
+plt.ylabel('Age', fontsize=16)
 plt.show()
 
 # Regression
@@ -185,8 +192,11 @@ plt.plot(
     linewidth = 3,
     linestyle = ':')
 
-plt.xlabel('Weight')
-plt.ylabel('NObeyesdad')
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.xlabel('Weight', fontsize=16)
+plt.ylabel('NObeyesdad', fontsize=16)
+plt.title('Linear Regression Model', fontsize=19)
 plt.show()
 
 Xols = data_iqr['Weight']
@@ -243,9 +253,9 @@ for i in range(1,11):
     kmeans.fit(Xc)
     wcss.append(kmeans.inertia_)
 plt.plot(range(1,11), wcss)
-plt.xlabel('Numbers of Clusters')
-plt.ylabel('WCSS')
-plt.title('Elbow Method')
+plt.xlabel('Numbers of Clusters', fontsize=16)
+plt.ylabel('WCSS', fontsize=16)
+plt.title('Elbow Method', fontsize=19)
 plt.show()
 
 k = 7
@@ -255,7 +265,7 @@ print(pred_k)
 
 sns.scatterplot(data = data_encoder, x = 'NObeyesdad', y = 'FAF', hue = pred_k, palette = "deep", s = 100)
 plt.legend(bbox_to_anchor=(1.01, 1),borderaxespad=0)
-plt.title("KMeans")
+plt.title("KMeans", fontsize=19)
 plt.show()
 
 data_kmeans = data.copy()
@@ -275,9 +285,9 @@ print('The Silhouette_Score of K-means is: {}'.format(kmeans_metrics))
 Xc = data_encoder.iloc[:, [12,16]].values
 
 hc = sch.dendrogram(sch.linkage(Xc, method = 'ward'))
-plt.title('Dendrogram')
-plt.xlabel('Sample')
-plt.ylabel('Euclidean Distances')
+plt.title('Dendrogram', fontsize=19)
+plt.xlabel('Sample', fontsize=16)
+plt.ylabel('Euclidean Distances', fontsize=16)
 plt.show()
 
 hc = AgglomerativeClustering(n_clusters = 2, affinity = 'euclidean', linkage = 'ward' )
@@ -285,7 +295,7 @@ pred_h = hc.fit_predict(Xc)
 
 sns.scatterplot(data = data_encoder, x = 'NObeyesdad', y = 'FAF', hue = pred_h, palette = "deep", s = 100)
 plt.legend(bbox_to_anchor=(1.01, 1),borderaxespad=0)
-plt.title("Hierarchical")
+plt.title("Hierarchical", fontsize=19)
 plt.show()
 
 data_hc = data.copy()
@@ -313,7 +323,7 @@ sns.relplot(x = 'NObeyesdad', y = 'FAF', hue = pred_d, data = data_encoder, pale
 "forestgreen", "limegreen", "darkgreen", "slategrey", "lightsteelblue", "cornflowerblue", "rosybrown", "lightcoral", "indianred", "darkgoldenrod",
 "goldenrod", "cornsilk", "lightseagreen", "mediumturquoise", "darkslategray", "mediumpurple", "rebeccapurple", "blueviolet", "palevioletred", "crimson",
 "pink"], s = 100)
-plt.title("DBSCAN")
+plt.title("DBSCAN", fontsize=19)
 plt.show()
 
 data_d = data.copy()
@@ -336,7 +346,7 @@ ylor = data_iqr['NObeyesdad']
 
 # Separating training and test data
 
-X_train, X_test, y_train, y_test = train_test_split(Xlor,ylor,test_size = .3, random_state=1)
+X_train, X_test, y_train, y_test = train_test_split(Xlor,ylor,test_size = .3,random_state=1)
 
 # Logistic Regression Classifier
 
