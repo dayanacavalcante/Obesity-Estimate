@@ -91,8 +91,12 @@ plt.figure(figsize=(20,16))
 for i,col in enumerate(list(data_encoder.columns.values)):
     plt.subplot(5,4,i+1)
     sns.distplot(data_encoder[col], color='b', kde= 0, label='data_encoder')
-    plt.grid()
-    plt.tight_layout()
+    plt.subplots_adjust(left=0.125,
+                        bottom=0.1, 
+                        right=0.9, 
+                        top=0.9, 
+                        wspace=0.2, 
+                        hspace=0.35)
 
 print(data_encoder.describe())
 print(data_encoder.mode())
@@ -102,6 +106,7 @@ print(data_encoder.var())
 
 plt.figure(figsize=(15,15))
 sns.heatmap(data_encoder.corr(), color='b', annot=True)
+plt.title('Correlation Heatmap',fontsize=16)
 
 ## Outliers Detection
 
@@ -253,9 +258,9 @@ for i in range(1,11):
     kmeans.fit(Xc)
     wcss.append(kmeans.inertia_)
 plt.plot(range(1,11), wcss)
-plt.xlabel('Numbers of Clusters', fontsize=16)
-plt.ylabel('WCSS', fontsize=16)
-plt.title('Elbow Method', fontsize=19)
+plt.xlabel('Numbers of Clusters', fontsize=14)
+plt.ylabel('WCSS', fontsize=14)
+plt.title('Elbow Method', fontsize=16)
 plt.show()
 
 k = 7
@@ -265,7 +270,7 @@ print(pred_k)
 
 sns.scatterplot(data = data_encoder, x = 'NObeyesdad', y = 'FAF', hue = pred_k, palette = "deep", s = 100)
 plt.legend(bbox_to_anchor=(1.01, 1),borderaxespad=0)
-plt.title("KMeans", fontsize=19)
+plt.title("KMeans", fontsize=16)
 plt.show()
 
 data_kmeans = data.copy()
@@ -285,9 +290,9 @@ print('The Silhouette_Score of K-means is: {}'.format(kmeans_metrics))
 Xc = data_encoder.iloc[:, [12,16]].values
 
 hc = sch.dendrogram(sch.linkage(Xc, method = 'ward'))
-plt.title('Dendrogram', fontsize=19)
-plt.xlabel('Sample', fontsize=16)
-plt.ylabel('Euclidean Distances', fontsize=16)
+plt.title('Dendrogram', fontsize=16)
+plt.xlabel('Sample', fontsize=14)
+plt.ylabel('Euclidean Distances', fontsize=14)
 plt.show()
 
 hc = AgglomerativeClustering(n_clusters = 2, affinity = 'euclidean', linkage = 'ward' )
@@ -295,7 +300,7 @@ pred_h = hc.fit_predict(Xc)
 
 sns.scatterplot(data = data_encoder, x = 'NObeyesdad', y = 'FAF', hue = pred_h, palette = "deep", s = 100)
 plt.legend(bbox_to_anchor=(1.01, 1),borderaxespad=0)
-plt.title("Hierarchical", fontsize=19)
+plt.title("Hierarchical", fontsize=16)
 plt.show()
 
 data_hc = data.copy()
@@ -323,7 +328,7 @@ sns.relplot(x = 'NObeyesdad', y = 'FAF', hue = pred_d, data = data_encoder, pale
 "forestgreen", "limegreen", "darkgreen", "slategrey", "lightsteelblue", "cornflowerblue", "rosybrown", "lightcoral", "indianred", "darkgoldenrod",
 "goldenrod", "cornsilk", "lightseagreen", "mediumturquoise", "darkslategray", "mediumpurple", "rebeccapurple", "blueviolet", "palevioletred", "crimson",
 "pink"], s = 100)
-plt.title("DBSCAN", fontsize=19)
+plt.title("DBSCAN", fontsize=16)
 plt.show()
 
 data_d = data.copy()
