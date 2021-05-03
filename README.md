@@ -375,7 +375,7 @@ Various values of _eps_ and _min_samples_ were tested and the values that gave t
 
 ![](/Charts/DBSCAN.png)
 
-According to the chart, the highest risk group is Cluster 22. In this cluster there are 187 people. DBSCAN returns a better result, compared to previous clustering algorithms. Because with a more precise group it is possible to do a better job with a specific group of people.
+According to the chart, the highest risk group is Cluster 22. In this cluster there are 187 people. DBSCAN returns a better result, compared to previous clustering algorithms. Because with a more select group it is possible to do more effective work.
 
 ```
       Gender        Age    Height      Weight  ...       CALC                 MTRANS        NObeyesdad  Cluster
