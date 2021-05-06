@@ -78,6 +78,19 @@ It's time to visualize the distribution of the data!
 
 ![](/Charts/distplot.png)
 
+Below is the dictionary of the ordinal and nominal categorical variables for a better understanding of the data distribution.
+```
+Dictionary: 
+Gender = {'Male': 1}, {'Female': 2}
+Overweight_History = {'no': 1}, {'yes': 2}
+Hypercaloric_Foods_Consumption = {'no': 1}, {'yes': 2}
+Foods_between_Main_Meals = {'no': 1}, {'Sometimes': 2}, {'Frequently': 3}, {'Always': 4}
+Smoke = {'no': 1}, {'yes': 2}
+Calorie_Monitoring = {'no': 1}, {'yes': 2}
+Alcoholic_Drinks = {'no': 1}, {'Sometimes': 2}, {'Frequently': 3}, {'Always': 4}
+Type_of_Transport_Used = {'Bike': 1}, {'Walking': 2}, {'Public_Transportation': 3}, {'Motorbike': 4}, {'Automobile': 5}
+Body_Mass_Index = {'Insufficient_Weight': 1}, {'Normal_Weight': 2}, {'Overweight_Level_I': 3}, {'Overweight_Level_II': 4}, {'Obesity_Type_I': 5}, {'Obesity_Type_II': 6}, {'Obesity_Type_III':7}
+```
 The _describe()_ function returns descriptive statistics values, as follows:
 
 ```
@@ -171,7 +184,7 @@ Notes:
 ```
 Warning! R-squared represents how strong my model represents linear behavior. But the model can still be improved even with a high R-squared value.
 
-R-squared was 0.847. This says that variable "Body Mass Index" was explained a good part of the variable "Weight"
+R-squared was 0.834. This says that variable "Body Mass Index" was explained a good part of the variable "Weight"
 
 With P> | t | very low, the Null Hypothesis was rejected. The Null Hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to work, it must be false. Generally if the "p-value" is less than 0.05, there is a strong relationship between the variables.
 
