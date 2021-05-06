@@ -144,7 +144,7 @@ I used box plot for data visualization. And it can be seen that there is a high 
 Analyzing the Age column with the function _value_counts()_, I saw that there are no such discrepant ages to be removed. I also analyzed the Weight column and did not see values that justified delete.
 ### _Regression_
 
-In the first predictive method of the project the Linear Regression algorithm was applied to make the model for predicting the level of Body Mass Index according to Weight. I chose the Weight column because the _Heatmap_ chart showed a strong relationship between the variables.
+In the first predictive method of the project the Linear Regression algorithm was applied to make the model for predicting the level of Body Mass Index according to Weight. It seems obvious to choose the Weight variable to create the Linear Regression model for the Body Mass Index, but I chose it due to the strong relationship, through the _Heatmap_ chart, and to analyze the OLS Regression Results.
 
 The model created was: 
 ```
@@ -184,12 +184,55 @@ Notes:
 ```
 Warning! R-squared represents how strong my model represents linear behavior. But the model can still be improved even with a high R-squared value.
 
-R-squared was 0.834. This says that variable "Body Mass Index" was explained a good part of the variable "Weight"
-
-With P> | t | very low, the Null Hypothesis was rejected. The Null Hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to work, it must be false. Generally if the "p-value" is less than 0.05, there is a strong relationship between the variables.
+- R-squared was 0.834. This says that variable "Body Mass Index" was explained a good part by the "Weight" variable; 
+- Prob (F-Statistic) was zero which implies that, in general, the regression is significant;
+- Prob(Omnibus) also was zero implies that the OLS assumption is not satisfied;
+- Durbin-Watson a value between 1 and 2 would be preferable. Here, it was 0.952 which indicates that the results of the regression are not reliable on the interpretation side of this metric;
+- Jarque-Bera (JB) is supposed to comply with the results of the Omnibus test. A large JB test value indicates that errors are not normally distributed;
+- P> | t | very low, the Null Hypothesis was rejected. The Null Hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to work, it must be false. Generally if the "p-value" is less than 0.05, there is a strong relationship between the variables.
 
 The correlation between the variables Body Mass Index and Overweight History also had a considerable value, according to the _Heatmap_ chart. But as the Overweight History is a binary diagnosis, the most suitable to be used is Logistic Regression and not Linear Regression. Logistic Regression was used later in the classification part of the project.
 
+I created another Linear Regression model for the Age and Body Mass Index variables.
+
+The model created was: 
+```
+The model is: Body Mass Index = 1.9553 + 0.088708X
+```
+As you can see in the chart, there is no linear behavior between the Age and Body Mass Index variables.
+
+![](/Charts/LinearRegressionModel2.png)
+
+Below is the OLS Regression results:
+
+```
+                        OLS Regression Results                            
+==============================================================================
+Dep. Variable:        Body_Mass_Index   R-squared:                       0.081
+Model:                            OLS   Adj. R-squared:                  0.080
+Method:                 Least Squares   F-statistic:                     185.1
+Date:                Thu, 06 May 2021   Prob (F-statistic):           1.77e-40
+Time:                        11:07:21   Log-Likelihood:                -4353.5
+No. Observations:                2111   AIC:                             8711.
+Df Residuals:                    2109   BIC:                             8722.
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          1.9553      0.164     11.933      0.000       1.634       2.277
+Age            0.0887      0.007     13.607      0.000       0.076       0.101
+==============================================================================
+Omnibus:                      961.729   Durbin-Watson:                   0.249
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              114.537
+Skew:                           0.102   Prob(JB):                     1.34e-25
+Kurtosis:                       1.877   Cond. No.                         99.5
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+```
+R-squared was very low compared to the previous model and higher AIC, in this case 8711, implies a worse model.
 ##### _Performance Metrics_
 
 After applying the Linear Regression algorithm for Machine Learning across the whole data set, the error that the model generated was calculated using the metrics: Mean Absolute Error (MAE) and Mean Absolute Percentage Error (MAPE). The following results were obtained:
