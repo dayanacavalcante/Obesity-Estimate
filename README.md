@@ -6,14 +6,14 @@ Application of predictive and descriptive methods to detect the group of people 
 
 The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 features and 2111 rows.
 
-The data were taken from the UCI Machine Learning Repository. Follow the link:  
+The data is available at the UCI Machine Learning Repository. Follow the link:  
 https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
 
 ## **Load Data**
 
 There are ordinal and nominal categorical variables and numerical variables with different orders of magnitude.
 
-As there were a lot of acronyms in the original column names, I renamed them for a better understanding.
+As there are a lot of acronyms in the original column names, I renamed them for a better understanding.
 ```
 Index(['Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight',
        'FAVC', 'FCVC', 'NCP', 'CAEC', 'SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE',
@@ -74,7 +74,7 @@ dtypes: float64(1), int32(9), int64(7)
 ```
 ### _Descriptive Analysis_
 
-Time to briefly describe the content of the data!
+It's time to visualize the distribution of the data!
 
 ![](/Charts/distplot.png)
 
@@ -104,18 +104,18 @@ Through charts it is can see:
 
 - Predominance of women with the highest level of obesity;
 - Most of the sample has a history of overweight in the family;
-- Majority consumes hypercaloric foods;
+- Majority consume hypercaloric foods;
 - Most eat three main meals;
 - Most people with the highest level of obesity do not practice physical activity;
 - The vast majority drink two liters of water a day;
 - Most drink alcohol sometimes;
-- The group with the highest level of obesity spends 1 hour a day using technology;
-- Most of the group uses public transport;
+- The group with the highest level of obesity spends 1 hour a day using technologies;
+- Most of the group use public transport;
 ### _Relationships Between Variables_
 
 ![](/Charts/heatmap.png)
 
-Through the Heatmap it can see a strong correlation between variables:
+Through the Heatmap it can see a strong correlation between the variables:
 - Body Mass Index x Weight;
 - Body Mass Index x Overweight History;
 - Type of Transport Used x Age;
@@ -124,14 +124,14 @@ Through the Heatmap it can see a strong correlation between variables:
 
 One of the most important parts of Exploratory Data Analysis (EAD) is the detection of outliers because if outliers are not studied at this stage, they can affect statistical modeling and Machine Learning. In statistics, an outlier is an observation point that is distant from other observations. Outlier may be due only to the variability in the measurement or it may indicate experimental errors. Machine Learning algorithms are sensitive to the range and distribution of attribute values. An outlier can be detected by visualization techniques such as box plot or with mathematical functions such as: Z-score and IQR score. 
 
-I used box plot for data visualization. And it can be seen that there is a high number of outliers in the "Age" column.
+I used box plot for data visualization. And it can be seen that there is a high number of outliers in the "Age" column and outliers have also been detected in other columns.
 
 ![](/Charts/boxplot.png)
 
-Analyzing the Age column with the function _value_counts()_, I saw that there are no such discrepant ages to be removed.
+Analyzing the Age column with the function _value_counts()_, I saw that there are no such discrepant ages to be removed. I also analyzed the Weight column and did not see values that justified delete.
 ### _Regression_
 
-In the first predictive method of the project the Linear Regression algorithm was applied to make the model for predicting the level of Body Mass Index according to Weight.
+In the first predictive method of the project the Linear Regression algorithm was applied to make the model for predicting the level of Body Mass Index according to Weight. I chose the Weight column because the _Heatmap_ chart showed a strong relationship between the variables.
 
 The model created was: 
 ```
@@ -173,9 +173,9 @@ Warning! R-squared represents how strong my model represents linear behavior. Bu
 
 R-squared was 0.847. This says that variable "Body Mass Index" was explained a good part of the variable "Weight"
 
-With P> | t | very low, the Null Hypothesis is rejected. The Null Hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to work, it must be false. Generally if the "p-value" is less than 0.05, there is a strong relationship between the variables.
+With P> | t | very low, the Null Hypothesis was rejected. The Null Hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to work, it must be false. Generally if the "p-value" is less than 0.05, there is a strong relationship between the variables.
 
-The correlation between the variables Body Mass Index and Overweight History also had a considerable value, according to the Heatmap chart. But as the Overweight History is a binary diagnosis, the most suitable to be used is Logistic Regression and not Linear Regression. Logistic Regression was used later in the classification part of the project.
+The correlation between the variables Body Mass Index and Overweight History also had a considerable value, according to the _Heatmap_ chart. But as the Overweight History is a binary diagnosis, the most suitable to be used is Logistic Regression and not Linear Regression. Logistic Regression was used later in the classification part of the project.
 
 ##### _Performance Metrics_
 
