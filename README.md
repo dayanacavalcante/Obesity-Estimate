@@ -25,11 +25,11 @@ Index(['Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight',
 
 One of the most time-consuming steps when working with Machine Learning models is data processing. It is also essential to understand the conclusions that can be drawn from the data. 
 
-Analyzing the level of Body Mass Index with Weight and Physical Activity, it can be seen that there is a variation in the frequency of physical activity by the sample classified with "Insufficient Weight", "Normal Weight", "Overweight Level I", "Overweight Level II" and "Obesity Type I". The sample classified with “Obesity Type II” and “Obesity Type III” also practice physical activity, mostly, but no more than two times a week.
+Analyzing the level of Body Mass Index with Weight and Physical Activity, it can be seen that there is a variation in the frequency of physical activity by the sample classified by "Insufficient Weight", "Normal Weight", "Overweight Level I", "Overweight Level II" and "Obesity Type I". The sample classified by “Obesity Type II” and “Obesity Type III” also practice physical activity, mostly, but no more than two times a week.
 
 ![](/Charts/scatter_weight_faf.png)
 
-There are columns with object and float data. First, I treated the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "Foods_between_Main_Meals", "Alcoholic_Drinks" and "Body_Mass_Index" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
+There is data of type object and float. I treated the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "Foods_between_Main_Meals", "Alcoholic_Drinks" and "Body_Mass_Index" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
 
 ```
       Gender        Age    Height      Weight  ...  Time_Spent_on_Technologies  Alcoholic_Drinks  Type_of_Transport_Used  Body_Mass_Index
@@ -47,9 +47,9 @@ There are columns with object and float data. First, I treated the object type d
 
 [2111 rows x 17 columns]
 ```
-For the other float type columns, I rounded the values using the _round()_ function. But I kept the column "Height" with the float type.
+For the other float type data, I rounded the values using the _round()_ function. But I kept the column "Height" with the float type.
 
-Through the _info()_ function it is verified that there are no missing values and the data types.
+Through the _info()_ function it was verified that there were no missing values and the data types.
 ```
 #   Column                          Non-Null Count  Dtype
 ---  ------                          --------------  -----
@@ -106,7 +106,7 @@ max       2.000000    61.000000     2.000000   173.000000  ...                  
 
 [8 rows x 17 columns]
 ```
-Having a visual summary of the information makes it easier to identify patterns and trends than to look at the lines of a spreadsheet. For that I used seaborn which is a Python data visualization library based on matplotlib.
+Having a visual summary of the information makes it easier to identify patterns and trends than to look at the lines of a spreadsheet. For that I used seaborn which is a Python data visualization library based on Matplotlib.
 
 | ![](/Charts/Gender.png) | ![](/Charts/Overweight_History.png) | ![](/Charts/Hypercaloric_Foods.png)|
 |:-:|:-:|:-:|
@@ -122,7 +122,7 @@ Through charts it is can see:
 - Most people with the highest level of obesity do not practice physical activity;
 - The vast majority drink two liters of water a day;
 - Most drink alcohol sometimes;
-- The group with the highest level of obesity spends 1 hour a day using technologies;
+- The group with the highest level of obesity spend 1 hour a day using technologies;
 - Most of the group use public transport;
 ### _Relationships Between Variables_
 
@@ -154,7 +154,7 @@ The model is: Body Mass Index = -1.8815 + 0.069223X
 There is a positive correlation between the predictive variable "Weight" and the predicted variable "Body Mass Index":
 ![](/Charts/LinearRegressionModel.png)
 
-The quality of the model was assessed using the "R²" and the "p-value":
+The quality of the model was assessed using the "_R-squared_" and the "_p-value_":
 ```
                         OLS Regression Results                            
 ==============================================================================
@@ -186,10 +186,10 @@ Warning! R-squared represents how strong my model represents linear behavior. Bu
 
 - R-squared was 0.834. This says that variable "Body Mass Index" was explained a good part by the "Weight" variable; 
 - Prob (F-Statistic) was zero which implies that, in general, the regression is significant;
-- Prob(Omnibus) also was zero implies that the OLS assumption is not satisfied;
+- Prob (Omnibus) also was zero implies that the OLS assumption is not satisfied;
 - Durbin-Watson a value between 1 and 2 would be preferable. Here, it was 0.952 which indicates that the results of the regression are not reliable on the interpretation side of this metric;
 - Jarque-Bera (JB) is supposed to comply with the results of the Omnibus test. A large JB test value indicates that errors are not normally distributed;
-- P> | t | very low, the Null Hypothesis was rejected. The Null Hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to work, it must be false. Generally if the "p-value" is less than 0.05, there is a strong relationship between the variables.
+- P> | t | very low, the Null Hypothesis was rejected. The Null Hypothesis means that there is no correlation between the predicted and predictive variables, that is, for a model to work, it must be false. Generally if the "_p-value_" is less than 0.05, there is a strong relationship between the variables.
 
 The correlation between the variables Body Mass Index and Overweight History also had a considerable value, according to the _Heatmap_ chart. But as the Overweight History is a binary diagnosis, the most suitable to be used is Logistic Regression and not Linear Regression. Logistic Regression was used later in the classification part of the project.
 
@@ -248,22 +248,21 @@ The result of the _Cross-Validation_ metric was also satisfactory:
 ```
 ### _Clustering_
 
-In this stage of the project, the descriptive method was approached through clustering, identifying the groups at greatest risk, according to the level of Body Mass Index and Physical Activity performed per week.
+At this step, the descriptive method was approached by clustering, to verify a more select group at risk, according to the level of Body Mass Index and Physical Activity performed per week.
 
 1. _Centroids-based clustering: K-Means_
 
-Before applying the algorithm, it is necessary to define a ‘K’, that is, a number of clusters (or groupings).
+Before applying the algorithm, it is necessary to define a ‘K’, that is, a number of clusters.
 ##### _Elbow Method_
 
 The _Elbow Method_ was used to find out the number of clusters that was used in KMeans.
 
 ![](/Charts/ElbowMethod.png)
 
-According to chart I chose k = 7.
+According to chart I chose k = 7. It can be seen that the most worrying group in the sample is Cluster 4, which has the highest rates of obesity and does not practice physical activity. There are 256 people in the purple cluster, as shown below:
 
 ![](/Charts/kmeans.png)
 
-It can be seen that the most worrying group in the sample is Cluster 4, which has the highest rates of obesity and does not practice physical activity. There are 256 people in the purple cluster, as shown below:
 ##### _Performance Metrics_
 
 Through the _silhouette_score_ metrics, there was a return of approximately 0.5 which can be considered an acceptable performance of KMeans.
@@ -279,9 +278,9 @@ To know the number of clusters that was used in this algorithm, I applied the _D
 
 The number of clusters used was 2.
 
-![](/Charts/Hierarchical.png)
-
 According to the graph, the risk group in the sample is the blue cluster or zero cluster. This cluster represents 1342 people, as shown below:
+
+![](/Charts/Hierarchical.png)
 ##### _Performance Metrics_
 
 Through the _silhouette_score_ metrics, there was a return of approximately 0.5 which can be considered an acceptable performance of Agglomerative Hierarchical.
