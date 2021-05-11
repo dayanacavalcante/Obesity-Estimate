@@ -4,9 +4,9 @@
 
 Application of predictive and descriptive methods to detect the group of people most at risk of life due to obesity, make the Linear Regression Model and determine the best classification algorithm for obesity levels.
 
-The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set contains 17 features and 2111 rows.
+The data belong to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set has 17 features and 2111 rows.
 
-The data is available at the UCI Machine Learning Repository. Follow the link:  
+The data are available at the UCI Machine Learning Repository. Follow the link:  
 https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
 
 ## **Load Data**
@@ -29,7 +29,7 @@ Analyzing the level of Body Mass Index with Weight and Physical Activity, it can
 
 ![](/Charts/scatter_weight_faf.png)
 
-There is data of type object and float. I treated the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "Foods_between_Main_Meals", "Alcoholic_Drinks" and "Body_Mass_Index" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
+There are data of type object and float. I treated the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "Foods_between_Main_Meals", "Alcoholic_Drinks" and "Body_Mass_Index" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
 
 ```
       Gender        Age    Height      Weight  ...  Time_Spent_on_Technologies  Alcoholic_Drinks  Type_of_Transport_Used  Body_Mass_Index
@@ -106,7 +106,7 @@ max       2.000000    61.000000     2.000000   173.000000  ...                  
 
 [8 rows x 17 columns]
 ```
-Having a visual summary of the information makes it easier to identify patterns and trends than to look at the lines of a spreadsheet. For that I used seaborn which is a Python data visualization library based on Matplotlib.
+Having a visual summary of the information makes it easier to identify patterns and trends than to look at lines of a spreadsheet. For that I used seaborn which is a Python data visualization library based on Matplotlib.
 
 | ![](/Charts/Gender.png) | ![](/Charts/Overweight_History.png) | ![](/Charts/Hypercaloric_Foods.png)|
 |:-:|:-:|:-:|
