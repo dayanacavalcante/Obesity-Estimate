@@ -4,6 +4,9 @@
 
 The data belong to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set has 17 features and 2111 rows.
 
+The data are available at the UCI Machine Learning Repository. Follow the link:  
+https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
+
 The purpose of this case study was:
 1. Make the Linear Regression model of Body Mass Index;
 2. Detect the group with the highest risk of life related to level of Body Mass Index and frequency of physical activity;
@@ -18,9 +21,6 @@ The purpose of this case study was:
 ### **Why?**
 
 Contribute to the initial idea of the research article in the creation of intelligent computational tools to identify the level of obesity of an individual, complementing with the detection of the group with the highest risk of life and providing the algorithm with a better performance for future classification analyzes.
-
-The data are available at the UCI Machine Learning Repository. Follow the link:  
-https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
 
 ## **Load Data**
 
@@ -44,7 +44,7 @@ The scatter plot chart shows how the variables Physical Activity, Weight and Bod
 
 For a better understanding of physical activity numbers, follow the dictionary:
 ```
-Physical_Activity  = {'I do not have': 1}, {'1 or 2 days': 2}, {'2 or 4 days': 3}, {'4 or 5 days': 4}
+Physical_Activity  = {'No': 1}, {'1 or 2 days': 2}, {'2 or 4 days': 3}, {'4 or 5 days': 4}
 ```
 
 It can be seen that there is a variation in the frequency of physical activity from individuals who do not perform to individuals who perform 4 or 5 days a week, in the following groups of Body Mass Index:
@@ -108,7 +108,7 @@ It's time to visualize the distribution of the data!
 Below is the dictionary of the ordinal and nominal categorical variables for a better understanding of the data distribution.
 ```
 Dictionary: 
-Gender = {'Man': 1}, {'Woman': 2}
+Gender = {'Male': 1}, {'Female': 2}
 Overweight_History = {'no': 1}, {'yes': 2}
 Hypercaloric_Foods_Consumption = {'no': 1}, {'yes': 2}
 Foods_between_Main_Meals = {'no': 1}, {'Sometimes': 2}, {'Frequently': 3}, {'Always': 4}
