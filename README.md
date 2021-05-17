@@ -2,9 +2,22 @@
 
 ## **Case Study**
 
-Application of predictive and descriptive methods to detect the group of people most at risk of life due to obesity, make the Linear Regression Model and determine the best classification algorithm for obesity levels.
-
 The data belong to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set has 17 features and 2111 rows.
+
+The purpose of this case study was:
+1. Make the Linear Regression model of Body Mass Index;
+2. Detect the group with the highest risk of life related to level of Body Mass Index and frequency of physical activity;
+3. Check which algorithm has the best performance in the classification of Body Mass Index;
+
+### **How?**
+
+1. With the Linear Regression algorithm;
+2. Through KMeans, Agglomerative Hierarchical and DBSCAN clustering algorithms;
+3. Through Logistic Regression, Decision Tree and Random Forest classification algorithms;
+
+### **Why?**
+
+Contribute to the initial idea of the research article in the creation of intelligent computational tools to identify the level of obesity of an individual, complementing with the detection of the group with the highest risk of life and providing the algorithm with a better performance for future classification analyzes.
 
 The data are available at the UCI Machine Learning Repository. Follow the link:  
 https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+#
@@ -25,9 +38,23 @@ Index(['Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight',
 
 One of the most time-consuming steps when working with Machine Learning models is data processing. It is also essential to understand the conclusions that can be drawn from the data. 
 
-Analyzing the level of Body Mass Index with Weight and Physical Activity, it can be seen that there is a variation in the frequency of physical activity by the sample classified by "Insufficient Weight", "Normal Weight", "Overweight Level I", "Overweight Level II" and "Obesity Type I". The sample classified by “Obesity Type II” and “Obesity Type III” also practice physical activity, mostly, but no more than two times a week.
+The scatter plot chart shows how the variables Physical Activity, Weight and Body Mass Index are distributed.
 
 ![](/Charts/scatter_weight_faf.png)
+
+For a better understanding of physical activity numbers, follow the dictionary:
+```
+Physical_Activity  = {'I do not have': 1}, {'1 or 2 days': 2}, {'2 or 4 days': 3}, {'4 or 5 days': 4}
+```
+
+It can be seen that there is a variation in the frequency of physical activity from individuals who do not perform to individuals who perform 4 or 5 days a week, in the following groups of Body Mass Index:
+- Insufficient Weight;
+- Normal Weight;
+- Overweight Level I;
+- Overweight Level II;
+- Obesity Type I;
+
+The sample classified by “Obesity Type II” and “Obesity Type III” also have variation in physical activity but no more than 2 or 4 days a week.
 
 There are data of type object and float. I treated the object type data with the _category_encoders_ method, which uses a dictionary to determine the order of the attributes. The _Label Encoder_ method could also be used, which is indicated for ordinal categorical variables, which is the case of the "Foods_between_Main_Meals", "Alcoholic_Drinks" and "Body_Mass_Index" columns. However, as this method assigns the order of values through the alphabetical order of the classes, it did not return an expected order. I could also use the _One Hot Encoding_ method or _get_dummies_ from the Pandas library but as my number of columns would increase, I chose not to use it.
 
@@ -81,7 +108,7 @@ It's time to visualize the distribution of the data!
 Below is the dictionary of the ordinal and nominal categorical variables for a better understanding of the data distribution.
 ```
 Dictionary: 
-Gender = {'Male': 1}, {'Female': 2}
+Gender = {'Man': 1}, {'Woman': 2}
 Overweight_History = {'no': 1}, {'yes': 2}
 Hypercaloric_Foods_Consumption = {'no': 1}, {'yes': 2}
 Foods_between_Main_Meals = {'no': 1}, {'Sometimes': 2}, {'Frequently': 3}, {'Always': 4}
@@ -150,10 +177,6 @@ The model created was:
 ```
 The model is: Body Mass Index = -1.8815 + 0.069223X
 ```
-
-There is a positive correlation between the predictive variable "Weight" and the predicted variable "Body Mass Index":
-![](/Charts/LinearRegressionModel.png)
-
 The quality of the model was assessed using the "_R-squared_" and the "_p-value_":
 ```
                         OLS Regression Results                            
@@ -199,10 +222,6 @@ The model created was:
 ```
 The model is: Body Mass Index = 1.9553 + 0.088708X
 ```
-As you can see in the chart, there is no linear behavior between the Age and Body Mass Index variables.
-
-![](/Charts/LinearRegressionModel2.png)
-
 Below is the OLS Regression results:
 
 ```
