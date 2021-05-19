@@ -142,15 +142,15 @@ Having a visual summary of the information makes it easier to identify patterns 
 
 Through charts it is can see:
 
-- Predominance of women with the highest level of obesity;
-- Most of the sample has a history of overweight in the family;
-- Majority consume hypercaloric foods;
+- The genders are balanced but it can be noted that the group classified as Obesity Type II (6), there is a predominance of the male gender (1) and the group classified as Obesity Type III (7), there is a predominance of the female gender (2);
+- Most of the sample has a history of overweight in the family (2);
+- Majority consume hypercaloric foods (2);
 - Most eat three main meals;
-- Most people with the highest level of obesity do not practice physical activity;
+- Most people with the highest level of obesity do not practice physical activity (0);
 - The vast majority drink two liters of water a day;
-- Most drink alcohol sometimes;
-- The group with the highest level of obesity spend 1 hour a day using technologies;
-- Most of the group use public transport;
+- Most drink alcohol sometimes (2);
+- The minority spends more than 5 hours a day using technologies (2);
+- Most of the group use public transport (3);
 ### _Relationships Between Variables_
 
 ![](/Charts/heatmap.png)
