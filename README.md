@@ -1,6 +1,4 @@
-# Obesity Estimate
-
-## **Case Study**
+## **Body Mass Index Case Study**
 
 The data belong to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set has 17 features and 2111 rows.
 
@@ -10,7 +8,7 @@ https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+ea
 The purpose of this case study was:
 1. Make the Linear Regression model of Body Mass Index;
 2. Detect the group with the highest risk of life related to level of Body Mass Index and frequency of physical activity;
-3. Check which algorithm has the best performance in the classification of Body Mass Index;
+3. Check which algorithm has the best performance in classifying Body Mass Index;
 
 ### **How?**
 
