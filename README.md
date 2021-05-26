@@ -7,7 +7,7 @@ https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+ea
 
 The purpose of this case study was:
 1. Make the Linear Regression model of Body Mass Index;
-2. Detect the group with the highest risk of life related to level of Body Mass Index and frequency of physical activity;
+2. Detect the groups of people at greatest health risk due to the level of obesity and the low (or zero) frequency of physical activity;
 3. Check which algorithm has the best performance in classifying Body Mass Index;
 
 ### **How?**
@@ -18,7 +18,7 @@ The purpose of this case study was:
 
 ### **Why?**
 
-Contribute to the initial idea of the research article in the creation of intelligent computational tools to identify the level of obesity of an individual, complementing with the detection of the group with the highest risk of life and providing the algorithm with a better performance for future classification analyzes.
+Contribute to the initial idea of the research article in the creation of intelligent computational tools to identify the level of obesity of an individual, complementing with the detection of the group with the highest health risk and providing the algorithm with a better performance for future classification analyzes.
 
 ## **Load Data**
 
@@ -175,6 +175,15 @@ The model created was:
 ```
 The model is: Body Mass Index = -1.8815 + 0.069223X
 ```
+Recalling the dictionary used for Body Mass Index levels:
+* Insufficient_Weight: 1;
+* Normal_Weight: 2;
+* Overweight_Level_I: 3;
+* Overweight_Level_II: 4;
+* Obesity_Type_I: 5;
+* Obesity_Type_II: 6;
+* Obesity_Type_III: 7;
+
 The quality of the model was assessed using the "_R-squared_" and the "_p-value_":
 ```
                         OLS Regression Results                            
