@@ -1,4 +1,4 @@
-## **Body Mass Index Case Study**
+## **Body Mass Index (BMI): Application of predictive and descriptive methods**
 
 The data belong to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The data set has 17 features and 2111 rows.
 
@@ -18,7 +18,7 @@ The purpose of this case study was:
 
 ### **Why?**
 
-Contribute to the initial idea of the research article in the creation of intelligent computational tools to identify the level of obesity of an individual, complementing with the detection of the group with the highest health risk and providing the algorithm with a better performance for future classification analyzes.
+Contribute to the initial idea of the research article in the creation of intelligent computational tools to identify the level of obesity of an individual.
 
 ## **Load Data**
 
@@ -169,7 +169,7 @@ I used box plot for data visualization. And it can be seen that there is a high 
 Analyzing the Age column with the function _value_counts()_, I saw that there are no such discrepant ages to be removed. I also analyzed the Weight column and did not see values that justified delete.
 ### _Regression_
 
-In the first predictive method of the project the Linear Regression algorithm was applied to make the model for predicting the level of Body Mass Index according to Weight. It seems obvious to choose the Weight variable to create the Linear Regression model for the Body Mass Index, but I chose it due to the strong relationship, through the _Heatmap_ chart, and to analyze the OLS Regression Results.
+In the first predictive method of the project the Linear Regression algorithm was applied to make the model for predicting the level of Body Mass Index according to Weight. 
 
 The model created was: 
 ```
