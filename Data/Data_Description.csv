@@ -1,0 +1,18 @@
+Variable,Definition,Key
+Gender,Gender,"Female, Male"
+Age,Age in years,Numeric values
+Height,Height in meters,Numeric values
+Weight,Weight in Kilograms,Numeric values
+family_history_with_overweight,Has a family member suffered or suffers from overweight?,"Yes, No"
+FAVC,Do you eat high caloric food frequently?,"Yes, No"
+FCVC,Do you usually eat vegetables in your meals?,"Never, Sometimes, Always"
+NCP,How many main meals do you have daily?,"Between 1 and 2, 3, More than 3 times"
+CAEC,Do you eat any food between meals?,"No, Sometimes, Frequently, Always"
+SMOKE,Do you smoke?,"Yes, No"
+CH2O,How much water do you drink daily?,"Less than 1L, Between 1 and 2L, More than 2L"
+SCC,Do you monitor the calories you eat daily?,"Yes, No"
+FAF,How often do you have physical activity?,"I don't have, 1 or 2 days, 2 or 4 days, 4 or 5 days"
+TUE,"How much time do you use technological devices such as cell phone, videogames, television, computer and others?","0-2h, 3-5h, More than 5h"
+CALC,How often do you drink alcohol?,"I don't drink, Sometimes, Frequently, Always"
+MTRANS,Which transportation do you usually use?,"Automobile, Motorbike, Bike, Public Transportation, Walking"
+NOBeyesdad,Obesity Levels Category,"Underweight, Normal, Overwheight I, Overwheight II, Obesity I, Obesity II, Obesity III"
