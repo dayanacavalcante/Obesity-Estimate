@@ -1,4 +1,4 @@
-## **Obesity Level Estimation Case Study: Application of predictive and descriptive methods**
+## **Obesity Level Estimate Case Study: Application of predictive and descriptive methods**
 
 The data belongs to a study made to estimate obesity levels in individuals from Mexico, Peru and Colombia, based on their eating habits and physical condition. The dataset has 17 features and 2111 rows.
 
